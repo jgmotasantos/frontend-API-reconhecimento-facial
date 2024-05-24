@@ -22,6 +22,6 @@ body {
   align-items: center;
   min-height: 100vh;
   background: url('./assets/background.jpg');
-  margin: 0;
+  margin-left: 430px;
 }
 </style>

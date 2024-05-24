@@ -3,23 +3,23 @@
     <form @submit.prevent="submitForm">
       <h1>Login</h1>
       <div class="input-box">
-        <input type="text" placeholder="Username" required v-model="username">
+        <input type="text" placeholder="Usuário" required v-model="username">
         <i class="bx bxs-user"></i>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Password" required v-model="password">
+        <input type="password" placeholder="Senha" required v-model="password">
         <i class="bx bxs-lock-alt"></i>
       </div>
 
       <div class="remember-forgot">
-        <label><input type="checkbox" v-model="rememberMe">Remember Me</label>
-        <a href="#">Forgot password?</a>
+        <label><input type="checkbox" v-model="rememberMe">Lembrar-se de mim</label>
+        <a href="#">Esqueceu a senha?</a>
       </div>
       
-      <button type="submit" class="btn">Login</button>
+      <button type="submit" class="btn">Entrar</button>
 
       <div class="register-link">
-        <p>Don't have an account?</p><a href="#">Register</a>
+        <p>Não possui uma conta?</p><a href="#">Registrar</a>
       </div>
     </form>
   </div>
@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .login-wrapper {
-  width: 500px;
+  width: 600px;
   background: transparent;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
