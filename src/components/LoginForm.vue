@@ -43,12 +43,15 @@ export default {
 
 <style scoped>
 .login-wrapper {
-  width: 420px;
-  background: purple;
-  color: white;
+  width: 500px;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgb(241, 235, 235);
   border-radius: 10px;
-  padding: 30px 40px;
-  margin: 0 auto; 
+  padding: 50px 40px;
+  margin: 0 auto;
 }
 
 .login-wrapper h1 {

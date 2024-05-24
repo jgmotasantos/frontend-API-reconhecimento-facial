@@ -21,6 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: white;
+  background: url('./assets/background.jpg');
+  margin: 0;
 }
 </style>
