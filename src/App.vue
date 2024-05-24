@@ -21,7 +21,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('./assets/background.jpg');
+  background: url('./assets/ultraPurple.jpg');
+  background-size: 140%;
   margin-left: 430px;
 }
 </style>
