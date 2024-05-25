@@ -19,7 +19,8 @@
       <button type="submit" class="btn">Entrar</button>
 
       <div class="register-link">
-        <p>Não possui uma conta?</p><a href="#">Registrar</a>
+        <p>Não possui uma conta?</p>
+        <router-link to="/register">Registrar</router-link>
       </div>
     </form>
   </div>
@@ -35,13 +36,15 @@ export default {
     };
   },
   methods: {
-    submitForm() {      console.log('Formulário enviado!');
+    submitForm() {        
+      console.log('Formulário enviado!');
     }
   }
 }
 </script>
 
 <style scoped>
+/* Seus estilos aqui */
 .login-wrapper {
   width: 600px;
   background: transparent;

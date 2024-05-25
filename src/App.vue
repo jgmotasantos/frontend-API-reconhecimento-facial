@@ -1,21 +1,16 @@
 <template>
   <div id="app">
-    <LoginForm/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import LoginForm from './components/LoginForm.vue'
-
 export default {
-  components: {
-    LoginForm
-  }
+  name: 'App'
 }
 </script>
 
 <style>
-
 body {
   display: flex;
   justify-content: center;
