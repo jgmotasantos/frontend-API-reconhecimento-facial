@@ -1,44 +1,69 @@
 <template>
-    <div class="login-wrapper">
-      <form @submit.prevent="submitForm">
-        <h1>Fazer meu Cadastro</h1>
-        <div class="input-box">
-          <input type="text" placeholder="Usuário" required v-model="username">
-          <i class="bx bxs-user"></i>
-        </div>
-        <div class="input-box">
-          <input type="email" placeholder="e-mail" required v-model="username">
-          <i class="bx bxs-user"></i>
-        </div>
-        <div class="input-box">
-          <input type="password" placeholder="Senha" required v-model="password">
-          <i class="bx bxs-lock-alt"></i>
-        </div>
-        <div class="input-box">
-          <input type="password" placeholder="Confirme sua senha" required v-model="confirmPassword">
-          <i class="bx bxs-lock-alt"></i>
-        </div>
-        <button type="submit" class="btn">Cadastrar</button>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-        confirmPassword: ''
-      };
-    },
-    methods: {
-      submitForm() {
-        console.log('Formulário enviado!');
+  <div class="login-wrapper">
+    <form @submit.prevent="submitForm">
+      <h1>Fazer meu Cadastro</h1>
+      <div class="input-box">
+        <input type="text" placeholder="Usuário" required v-model="username">
+        <i class="bx bxs-user"></i>
+      </div>
+      <div class="input-box">
+        <input type="email" placeholder="E-mail" required v-model="email">
+        <i class="bx bxs-user"></i>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Senha" required v-model="password">
+        <i class="bx bxs-lock-alt"></i>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Confirme sua senha" required v-model="confirmPassword">
+        <i class="bx bxs-lock-alt"></i>
+      </div>
+      <button type="submit" class="btn">Cadastrar</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
+  },
+  methods: {
+    submitForm() {
+      // Verifica se as senhas coincidem
+      if (this.password !== this.confirmPassword) {
+        console.error('Passwords do not match');
+        return;
       }
+
+      // Dados do usuário a serem enviados
+      const userData = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      };
+
+      // Envia os dados para o backend via Axios
+      axios.post('/auth/register', userData)
+        .then(response => {
+          console.log('Cadastro realizado com sucesso:', response.data);
+          // Aqui você pode fazer algo com a resposta do backend, se necessário
+        })
+        .catch(error => {
+          console.error('Erro ao cadastrar usuário:', error);
+        });
     }
   }
-  </script>
+};
+</script>
+
   
   <style scoped>
   /* Seus estilos aqui */

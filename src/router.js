@@ -3,8 +3,8 @@ import LoginForm from './components/LoginForm.vue'
 import RegisterPage from './components/RegisterPage.vue'
 
 const routes = [
-  { path: '/', component: LoginForm },
-  { path: '/register', component: RegisterPage }
+  { path: '/auth/login', component: LoginForm },
+  { path: '/auth/register', component: RegisterPage }
 ]
 
 const router = createRouter({

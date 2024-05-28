@@ -20,7 +20,7 @@
 
       <div class="register-link">
         <p>Não possui uma conta?</p>
-        <router-link to="/register">Registrar</router-link>
+        <router-link to="/auth/register">Registrar</router-link>
       </div>
     </form>
   </div>
