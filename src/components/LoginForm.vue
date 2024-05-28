@@ -44,7 +44,6 @@ export default {
 </script>
 
 <style scoped>
-/* Seus estilos aqui */
 .login-wrapper {
   width: 600px;
   background: transparent;
@@ -52,7 +51,7 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: rgb(241, 235, 235);
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 50px 40px;
   margin: 0 auto;
 }
@@ -60,7 +59,8 @@ export default {
 .login-wrapper h1 {
   font-size: 36px;
   text-align: center;
-  margin-bottom: 20px; 
+  margin-bottom: 30px;
+  color: white
 }
 
 .login-wrapper .input-box {
@@ -77,8 +77,8 @@ export default {
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
-  padding-left: 40px; 
-  color: white; 
+  padding-left: 10px; 
+  color: white ; 
 }
 
 .login-wrapper .input-box input::placeholder {
@@ -130,7 +130,7 @@ export default {
 }
 
 .login-wrapper .register-link {
-  font-size: 14.5px;
+  font-size: 16.5px;
   text-align: center;
   margin-top: 20px;
 }

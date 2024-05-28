@@ -18,6 +18,5 @@ body {
   min-height: 100vh;
   background: url('./assets/ultraPurple.jpg');
   background-size: 140%;
-  margin-left: 430px;
 }
 </style>

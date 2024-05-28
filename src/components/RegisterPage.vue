@@ -99,7 +99,7 @@ export default {
     outline: none;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
-    padding-left: 40px; 
+    padding-left: 10px; 
     color: white; 
   }
   
