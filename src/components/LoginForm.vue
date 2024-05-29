@@ -3,8 +3,8 @@
     <form @submit.prevent="submitForm">
       <h1>Login</h1>
       <div class="input-box">
-        <input type="text" placeholder="Usuário" required v-model="username">
-        <i class="bx bxs-user"></i>
+        <input type="email" placeholder="E-mail" required v-model="email">
+        <i class="bx bxs-envelope"></i>
       </div>
       <div class="input-box">
         <input type="password" placeholder="Senha" required v-model="password">
@@ -27,17 +27,38 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       rememberMe: false
     };
   },
   methods: {
-    submitForm() {        
-      console.log('Formulário enviado!');
+    async submitForm() {
+      try {
+        const response = await axios.post('/auth/login', {
+          email: this.email,
+          password: this.password
+        });
+        
+        // Logar o token de sucesso no console
+        console.log('Sucesso:', response.data);
+
+        // Realizar ações adicionais em caso de sucesso, como redirecionamento
+        // this.$router.push('/dashboard'); // Por exemplo, redirecionar para o dashboard
+
+      } catch (error) {
+        // Capturar e logar a mensagem de erro no console
+        let errorMessage = 'Erro ao realizar login.';
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data;
+        }
+        console.error('Erro:', errorMessage);
+      }
     }
   }
 }
