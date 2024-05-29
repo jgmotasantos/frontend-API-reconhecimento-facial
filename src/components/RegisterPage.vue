@@ -53,11 +53,20 @@ export default {
       // Envia os dados para o backend via Axios
       axios.post('/auth/register', userData)
         .then(response => {
-          console.log('Cadastro realizado com sucesso:', response.data);
+          console.log(response.data);
           // Aqui você pode fazer algo com a resposta do backend, se necessário
         })
         .catch(error => {
-          console.error('Erro ao cadastrar usuário:', error);
+          if (error.response) {
+            // O servidor respondeu com um status diferente de 2xx
+            console.error('Erro ao cadastrar usuário:', error.response.data);
+          } else if (error.request) {
+            // A requisição foi feita, mas não houve resposta
+            console.error('Sem resposta do servidor:', error.request);
+          } else {
+            // Outro tipo de erro ocorreu ao configurar a requisição
+            console.error('Erro ao configurar a requisição:', error.message);
+          }
         });
     }
   }
