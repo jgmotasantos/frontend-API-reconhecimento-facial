@@ -1,26 +1,31 @@
 <template>
   <div class="login-wrapper">
-    <form @submit.prevent="submitForm">
-      <h1>Login</h1>
+    <form @submit.prevent="submitForm" class="text-white">
+      <h1 class="text-center mb-4">Login</h1>
       <div class="input-box">
-        <input type="email" placeholder="E-mail" required v-model="email">
-        <i class="bx bxs-envelope"></i>
+        <div class="input-group">
+          <input type="email" class="form-control" placeholder="E-mail" required v-model="email" style="border-radius: 100px;">
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="bx bxs-envelope"></i></span>
+          </div>
+        </div>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Senha" required v-model="password">
-        <i class="bx bxs-lock-alt"></i>
+        <div class="input-group">
+          <input type="password" class="form-control" placeholder="Senha" required v-model="password" style="border-radius: 100px;">
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="bx bxs-lock-alt"></i></span>
+          </div>
+        </div>
       </div>
-
-      <div class="remember-forgot">
-        <label><input type="checkbox" v-model="rememberMe">Lembrar-se de mim</label>
-        <a href="#">Esqueceu a senha?</a>
+      <div class="remember-forgot d-flex justify-content-between align-items-center">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" v-model="rememberMe">Lembrar-se de mim</label>
+        <a href="#" class="text-white">Esqueceu a senha?</a>
       </div>
-      
-      <button type="submit" class="btn">Entrar</button>
-
-      <div class="register-link">
-        <p>Não possui uma conta?</p>
-        <router-link to="/auth/register">Registrar</router-link>
+      <button type="submit" class="btn btn-light btn-block mt-3" >Entrar</button>
+      <div class="register-link text-center mt-3">
+        <p>Ainda não possui uma conta?</p>
+        <router-link to="/auth/register" class="text-" style="color: aqua;">Registrar</router-link>
       </div>
     </form>
   </div>
@@ -45,14 +50,8 @@ export default {
           password: this.password
         });
         
-        // Logar o token de sucesso no console
         console.log('Sucesso:', response.data);
-
-        // Realizar ações adicionais em caso de sucesso, como redirecionamento
-        // this.$router.push('/dashboard'); // Por exemplo, redirecionar para o dashboard
-
       } catch (error) {
-        // Capturar e logar a mensagem de erro no console
         let errorMessage = 'Erro ao realizar login.';
         if (error.response && error.response.data && error.response.data.message) {
           errorMessage = error.response.data;
@@ -67,11 +66,11 @@ export default {
 <style scoped>
 .login-wrapper {
   width: 600px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  color: rgb(241, 235, 235);
+  color: white;
   border-radius: 20px;
   padding: 50px 40px;
   margin: 0 auto;
@@ -81,58 +80,53 @@ export default {
   font-size: 36px;
   text-align: center;
   margin-bottom: 30px;
-  color: white
+  color: white;
 }
 
 .login-wrapper .input-box {
-  position: relative; 
+  position: relative;
   width: 100%;
   margin: 30px 0;
 }
 
-.login-wrapper .input-box input {
-  width: 100%;
-  height: 50px;
-  background: transparent;
-  border: none;
-  outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 40px;
-  padding-left: 10px; 
-  color: white ; 
+.login-wrapper .input-group {
+  display: flex;
 }
 
-.login-wrapper .input-box input::placeholder {
+.login-wrapper .input-group input {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+  flex: 1;
+}
+
+.login-wrapper .input-group input::placeholder {
   color: white;
 }
 
-.login-wrapper .input-box i {
-  position: absolute;
-  left: 10px; 
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: white; 
-}
-
-.login-wrapper .remember-forgot {
+.login-wrapper .input-group-text {
+  background: transparent;
+  border: none;
   display: flex;
-  justify-content: space-between;
-  font-size: 14.5px;
-  margin: -15px 0 15px;
+  align-items: center;
 }
 
-.login-wrapper .remember-forgot label input {
+.login-wrapper .input-group-text i {
+  color: white;
+}
+
+.login-wrapper .form-check-input {
   accent-color: white;
   margin-right: 3px;
 }
 
-.login-wrapper .remember-forgot a {
+.login-wrapper a {
   color: white;
-  text-decoration: none;
 }
 
-.login-wrapper .remember-forgot a:hover {
+.login-wrapper a:hover {
   text-decoration: underline;
 }
 
@@ -141,28 +135,26 @@ export default {
   height: 45px;
   background: white;
   border: none;
-  outline: none;
   border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  font-size: 16px;
   color: #333;
   font-weight: 600;
 }
 
-.login-wrapper .register-link {
-  font-size: 16.5px;
-  text-align: center;
-  margin-top: 20px;
+.register-link p {
+  color: white;
+  margin-bottom: 10px;
 }
 
-.login-wrapper .register-link p a {
+.register-link a {
   color: white;
   text-decoration: none;
-  font-weight: 20px 0 15px;
+  background: none; /* Remove background */
+  border: none;
+  border-radius: 40px;
 }
 
-.login-wrapper .register-link p a:hover {
+.register-link a:hover {
   text-decoration: underline;
+  color: aqua
 }
 </style>
