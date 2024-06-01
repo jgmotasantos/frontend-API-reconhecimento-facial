@@ -11,12 +11,5 @@ export default {
 </script>
 
 <style>
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: url('./assets/ultraPurple.jpg');
-  background-size: 140%;
-}
+
 </style>
