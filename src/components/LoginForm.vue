@@ -35,36 +35,41 @@
 
 <script>
 import axios from 'axios';
-import '../styles/LoginForm.css';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
     return {
       email: '',
-      password: '',
-      rememberMe: false
+      password: ''
     };
   },
   methods: {
+    ...mapActions(['saveAuthToken']),
     async submitForm() {
       try {
         const response = await axios.post('/auth/login', {
           email: this.email,
           password: this.password
         });
-        
+
+        // Extrair o token do cabeçalho de resposta
+        const token = response.headers.authorization;
+
+        // Salvar o token no Vuex
+        this.saveAuthToken(token);
+
         console.log('Sucesso:', response.data);
-        this.$router.push('/my-groups'); // Redirecionar após o sucesso
+
+        // Redirecionar após o sucesso
+        this.$router.push('/grupos');
       } catch (error) {
-        let errorMessage = 'Erro ao realizar login.';
-        if (error.response && error.response.data && error.response.data.message) {
-          errorMessage = error.response.data;
-        }
-        console.error('Erro:', errorMessage);
+        // Se ocorrer um erro, apenas imprimir a resposta do backend
+        console.error('Erro:', error.response.data);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

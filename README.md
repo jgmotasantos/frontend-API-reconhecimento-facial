@@ -38,5 +38,4 @@ npm run lint
 ## Backlog
 
 - Adicionar notifications
-- Garantir que, caso usuario coloque um email invalido e a request nao seja enviada, isso seja notificado ao usuario
 - implementar home e redirecionamento
