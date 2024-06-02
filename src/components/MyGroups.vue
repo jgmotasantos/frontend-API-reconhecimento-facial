@@ -111,7 +111,7 @@ export default {
 
       const config = {
         headers: {
-          Authorization: `Bearer ${this.authToken}` // Use o token do Vuex
+          Authorization: `${this.authToken}` // Use o token do Vuex
         }
       };
 
