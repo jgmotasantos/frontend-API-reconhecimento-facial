@@ -1,4 +1,4 @@
-<template>
+<template class="new-body">
   <div class="page-wrapper">
     <div class="login-wrapper">
       <form @submit.prevent="submitForm" class="text-white">
@@ -80,7 +80,7 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('../assets/ultraPurple.jpg');
+  background: url('../assets/classbackgorund.jpg');
   background-size: cover;
 }
 </style>
