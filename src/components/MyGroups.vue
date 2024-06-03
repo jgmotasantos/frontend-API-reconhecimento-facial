@@ -1,6 +1,7 @@
 <template>
   <div class="my-groups-wrapper">
     <div class="container">
+      <logout-button></logout-button>
       <h1>Meus Grupos</h1>
       <div class="input-container">
         <input 
@@ -77,8 +78,12 @@
 <script>
 import axios from 'axios';
 import { mapState } from 'vuex';
+import LogoutButton from './LogoutButton.vue'; 
 
 export default {
+  components: {
+    'logout-button': LogoutButton // Registrando o componente LogoutButton
+  },
   data() {
     return {
       newGroupName: '',
@@ -164,4 +169,10 @@ export default {
 
 <style scoped>
 @import '../styles/MyGroups.css';
+
+.logout-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 </style>
