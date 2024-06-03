@@ -28,6 +28,12 @@
           <p>Ainda não possui uma conta?</p>
           <router-link to="/auth/register" class="text-" style="color: aqua;">Registrar</router-link>
         </div>
+        <div v-if="errorMessage" class="error-message text-center mt-3">
+          {{ errorMessage }}
+        </div>
+        <div v-if="errorType" class="error-type text-center mt-1">
+          {{ errorType }}
+        </div>
       </form>
     </div>
   </div>
@@ -41,14 +47,17 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      rememberMe: false,
+      errorMessage: '',
+      errorType: ''
     };
   },
   methods: {
     ...mapActions(['saveAuthToken']),
     async submitForm() {
       try {
-        const response = await axios.post('/auth/login', {
+        const response = await axios.post('http://localhost:8080/auth/login', {
           email: this.email,
           password: this.password
         });
@@ -64,7 +73,14 @@ export default {
         // Redirecionar após o sucesso
         this.$router.push('/grupos');
       } catch (error) {
-        // Se ocorrer um erro, apenas imprimir a resposta do backend
+        // Se ocorrer um erro, definir a mensagem e o tipo de erro
+        if (error.response && error.response.data) {
+          this.errorMessage = error.response.data.message || 'Ocorreu um erro ao tentar fazer login.';
+          this.errorType = error.response.data.error || 'Erro desconhecido';
+        } else {
+          this.errorMessage = 'Ocorreu um erro ao tentar fazer login.';
+          this.errorType = 'Erro desconhecido';
+        }
         console.error('Erro:', error.response.data);
       }
     }
@@ -82,5 +98,15 @@ export default {
   min-height: 100vh;
   background: url('../assets/classbackgorund.jpg');
   background-size: cover;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.error-type {
+  color: orange;
+  font-weight: bold;
 }
 </style>

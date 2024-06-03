@@ -1,5 +1,30 @@
 <template>
-  <div class="my-groups-wrapper">   
+  <header style="background-color: #1c1c1c; padding-bottom: 10px">
+  <div class="navbar">
+    <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
+      <ul class="links">
+        <li><router-link to="/">Presença</router-link></li>
+        <li><router-link to="/about">Sobre Nós</router-link></li>
+        <li><router-link to="/services">Serviços</router-link></li>
+        <li><router-link to="/contact">Contato</router-link></li>
+      </ul>
+    <router-link to = '/auth/login' class="action-btn">Começar Agora</router-link>
+    <div class="toggle-btn" @click="toggleMenu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="dropdown-menu" :class="{ open: menuOpen }">
+      <ul>
+        <li><router-link to="/">Presença</router-link></li>
+        <li><router-link to="/about">Sobre Nós</router-link></li>
+        <li><router-link to="/services">Serviços</router-link></li>
+        <li><router-link to="/contact">Contato</router-link></li>
+         <li><router-link to="/auth/login" class="action-btn">Começar Agora</router-link></li>
+      </ul>
+    </div>
+  </div>
+  </header>
+  <main>
+    <div class="my-groups-wrapper">   
     <logout-button class="logout-button"></logout-button>
     <div class="container">
       <h1>Meus Grupos</h1>
@@ -73,6 +98,7 @@
       </div>
     </div>
    </div> 
+  </main>
 </template>
 
 <script>
@@ -169,6 +195,7 @@ export default {
 
 <style scoped>
 @import '../styles/MyGroups.css';
+@import '../styles/HomePage.css';
 
 .logout-button {
   position: absolute;
