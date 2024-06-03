@@ -1,7 +1,7 @@
 <template>
-  <div class="my-groups-wrapper">
+  <div class="my-groups-wrapper">   
+    <logout-button class="logout-button"></logout-button>
     <div class="container">
-      <logout-button></logout-button>
       <h1>Meus Grupos</h1>
       <div class="input-container">
         <input 
