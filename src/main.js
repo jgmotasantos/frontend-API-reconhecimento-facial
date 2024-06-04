@@ -21,7 +21,7 @@ axios.interceptors.response.use(
       alert('Acesso requer autenticação');
 
       // Redirecionar para a página de login
-      router.push('auth/login');
+      router.push('/auth/login');
     }
     return Promise.reject(error);
   }
