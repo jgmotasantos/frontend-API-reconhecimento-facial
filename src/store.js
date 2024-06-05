@@ -3,15 +3,17 @@ import { createStore } from 'vuex';
 export default createStore({
   state() {
     return {
-      authToken: null
+      authToken: localStorage.getItem('authToken') || null
     };
   },
   mutations: {
     setAuthToken(state, token) {
       state.authToken = token;
+      localStorage.setItem('authToken', token); // Salvar no localStorage
     },
     clearAuthToken(state) {
       state.authToken = null;
+      localStorage.removeItem('authToken'); // Remover do localStorage
     }
   },
   actions: {
