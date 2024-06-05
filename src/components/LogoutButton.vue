@@ -43,6 +43,3 @@
     }
   };
   </script>
-
-  Neste exemplo, estamos verificando se a resposta do backend contém um campo success que indica se a requisição foi bem-sucedida. Se for o caso, estamos exibindo a mensagem de sucesso do backend usando um alert. Certifique-se de ajustar esta manipulação de acordo com o formato e a estrutura dos dados enviados pelo seu backend.
-  

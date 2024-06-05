@@ -66,7 +66,7 @@ export default {
         this.$router.push('/grupos');
       } catch (error) {
         // O erro será tratado pelo interceptor global
-        console.error('Erro:', error);
+        console.error('Erro:', error.response.data);
       }
     }
   }
