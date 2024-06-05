@@ -1,4 +1,4 @@
-<template class="new-body">
+<template>
   <div class="page-wrapper">
     <div class="login-wrapper">
       <form @submit.prevent="submitForm" class="text-white">
@@ -28,12 +28,6 @@
           <p>Ainda não possui uma conta?</p>
           <router-link to="/auth/register" class="text-" style="color: aqua;">Registrar</router-link>
         </div>
-        <div v-if="errorMessage" class="error-message text-center mt-3">
-          {{ errorMessage }}
-        </div>
-        <div v-if="errorType" class="error-type text-center mt-1">
-          {{ errorType }}
-        </div>
       </form>
     </div>
   </div>
@@ -48,9 +42,7 @@ export default {
     return {
       email: '',
       password: '',
-      rememberMe: false,
-      errorMessage: '',
-      errorType: ''
+      rememberMe: false
     };
   },
   methods: {
@@ -73,15 +65,8 @@ export default {
         // Redirecionar após o sucesso
         this.$router.push('/grupos');
       } catch (error) {
-        // Se ocorrer um erro, definir a mensagem e o tipo de erro
-        if (error.response && error.response.data) {
-          this.errorMessage = error.response.data.message || 'Ocorreu um erro ao tentar fazer login.';
-          this.errorType = error.response.data.error || 'Erro desconhecido';
-        } else {
-          this.errorMessage = 'Ocorreu um erro ao tentar fazer login.';
-          this.errorType = 'Erro desconhecido';
-        }
-        console.error('Erro:', error.response.data);
+        // O erro será tratado pelo interceptor global
+        console.error('Erro:', error);
       }
     }
   }
@@ -98,15 +83,5 @@ export default {
   min-height: 100vh;
   background: url('../assets/classbackgorund.jpg');
   background-size: cover;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-}
-
-.error-type {
-  color: orange;
-  font-weight: bold;
 }
 </style>

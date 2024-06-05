@@ -4,11 +4,16 @@ import router from './router';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import store from './store'; // Importe o arquivo de configuração do Vuex
+import store from './store';
+import ErrorDisplay from './components/GlobalErrorDisplay.vue'; // Importe o componente global de exibição de erros
 
 axios.defaults.baseURL = 'http://localhost:8080';
 
 const app = createApp(App);
+
+const errorDisplay = createApp(ErrorDisplay);
+const errorDisplayInstance = errorDisplay.mount(document.createElement('div'));
+document.body.appendChild(errorDisplayInstance.$el);
 
 // Configurar o interceptor
 axios.interceptors.response.use(
@@ -16,12 +21,22 @@ axios.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response.status === 401) {
-      // Exibir uma mensagem de erro ao usuário usando um alerta
-      alert('Acesso requer autenticação');
-
-      // Redirecionar para a página de login
-      router.push('/auth/login');
+    if (error.response) {
+      if (error.response.status === 401) {
+        alert('Acesso requer autenticação');
+        router.push('/auth/login');
+      } else {
+        errorDisplayInstance.showError(error);
+      }
+    } else {
+      errorDisplayInstance.showError({
+        response: {
+          data: {
+            message: 'Ocorreu um erro desconhecido.',
+            error: 'Erro desconhecido'
+          }
+        }
+      });
     }
     return Promise.reject(error);
   }
@@ -29,5 +44,5 @@ axios.interceptors.response.use(
 
 app
   .use(router)
-  .use(store) // Adicione o Vuex ao aplicativo
+  .use(store)
   .mount('#app');
