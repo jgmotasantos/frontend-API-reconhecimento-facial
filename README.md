@@ -37,5 +37,4 @@ npm run lint
 
 ## Backlog
 
-- Adicionar notifications
-- implementar home e redirecionamento
+- notificacao de deslogar

@@ -38,7 +38,7 @@
         const nomeDoGrupo = this.$route.params.nomeDoGrupo;
   
         try {
-          const response = await axios.get(`http://localhost:8080/grupos/${nomeDoGrupo}`, {
+          const response = await axios.get(`/grupos/${nomeDoGrupo}`, {
             headers: {
               Authorization: `${authToken}`
             }

@@ -20,12 +20,12 @@
             }
           });
   
+          // Redirecionar para a página de login
+          this.$router.push('/auth/login');
+
           // Limpar o token do Vuex
           this.$store.dispatch('clearAuthToken');
-  
-          // Redirecionar para a página de login
-          this.$router.push('/home');
-  
+            
           // Exibir mensagem de sucesso, se necessário
           console.log('Logout realizado com sucesso:', response.data);
   

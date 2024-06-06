@@ -38,7 +38,7 @@ h1 {
   outline: none;
   padding: 10px 10px 10px 20px;
   background-color: transparent;
-  border: 2px solid #e6b7eca1;
+  border: 2px solid rgb(0, 98, 255);
   border-radius: 30px;
   color: #eee;
   font-size: 16px;
@@ -53,7 +53,7 @@ h1 {
 .add-button {
   border: none;
   outline: none;
-  background: #e6b7eca1;
+  background: rgb(0, 98, 255);
   color: #fff;
   font-size: 35px;
   cursor: pointer;
