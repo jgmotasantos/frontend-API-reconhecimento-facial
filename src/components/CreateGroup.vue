@@ -34,83 +34,93 @@
       </div>
     </div>
   </template>
-  
-  <script>
-  import axios from 'axios';
-  import { mapState } from 'vuex';
-  import AppNavbar from './AppNavbar.vue';
-  import LogoutButton from './LogoutButton.vue';
-  
-  export default {
-    name: 'CreateGroup',
-    components: {
-      AppNavbar,
-      LogoutButton
-    },
-    data() {
-      return {
-        newGroupName: '',
-        loading: false,
-        successMessage: '',
-        errorMessage: ''
+
+<script>
+import axios from 'axios';
+import { mapState } from 'vuex';
+import AppNavbar from './AppNavbar.vue';
+import LogoutButton from './LogoutButton.vue';
+
+export default {
+  name: 'CreateGroup',
+  components: {
+    AppNavbar,
+    LogoutButton
+  },
+  data() {
+    return {
+      newGroupName: '',
+      loading: false,
+      successMessage: '',
+      errorMessage: ''
+    };
+  },
+  computed: {
+    ...mapState(['authToken'])
+  },
+  methods: {
+    addGroup() {
+      if (this.newGroupName.trim() === '') return;
+
+      this.loading = true;
+      this.successMessage = '';
+      this.errorMessage = '';
+
+      const newGroup = { name: this.newGroupName };
+      const config = {
+        headers: {
+          Authorization: `${this.authToken}`
+        }
       };
+
+      axios.post('/grupos/criar', newGroup, config)
+        .then(response => {
+          this.newGroupName = '';
+          this.successMessage = 'Grupo adicionado com sucesso!';
+          this.$emit('group-added');
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
-    computed: {
-      ...mapState(['authToken'])
-    },
-    methods: {
-      addGroup() {
-        if (this.newGroupName.trim() === '') return;
-  
-        this.loading = true;
-        this.successMessage = '';
-        this.errorMessage = '';
-  
-        const newGroup = { name: this.newGroupName };
-        const config = {
-          headers: {
-            Authorization: `Bearer ${this.authToken}`
+    fetchData() {
+
+      // not working, cant get response from backendd
+
+      this.loading = true;
+      this.successMessage = '';
+      this.errorMessage = '';
+
+      const config = {
+        headers: {
+          Authorization: `${this.authToken}`
+        }
+      };
+
+      axios.get('/grupos/criar', config)
+        .then(response => {
+          console.log('Dados obtidos:', response.data);
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log('Erro de autenticação:', error.response.data);
+          } else {
+            console.log('Erro:', error.message);
           }
-        };
-  
-        axios.post('/grupos/criar', newGroup, config)
-          .then(response => {
-            this.newGroupName = '';
-            this.successMessage = 'Grupo adicionado com sucesso!';
-            this.$emit('group-added');
-            console.log(response.data);
-          })
-          .catch(error => {
-            if (error.response) {
-              this.errorMessage = error.response.data.message || 'Erro ao adicionar grupo. Tente novamente.';
-            } else {
-              this.errorMessage = 'Erro ao adicionar grupo. Tente novamente.';
-            }
-          })
-          .finally(() => {
-            this.loading = false;
-          });
-      },
-      getGroup() {
-        const config = {
-          headers: {
-            Authorization: `${this.authToken}`
-          }
-        };
-  
-        axios.get('/grupos/criar', config)
-          .then(response => {
-            console.log(response.data);
-          })
-          .catch(error => {
-            console.error('Erro ao obter grupo:', error.response.data);
-          });
-      }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     }
-  };
-  </script>
-  
-  <style scoped>
+  }
+};
+</script>  
+
+<style scoped>
   @import '../styles/MyGroups.css';
   </style>
   

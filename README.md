@@ -37,4 +37,4 @@ npm run lint
 
 ## Backlog
 
-- notificacao de deslogar
+- GET /grupos/criar esta funcionando no backend, mas nao consigo extrair dados no frontend
