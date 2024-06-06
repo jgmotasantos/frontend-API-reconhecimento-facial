@@ -2,7 +2,6 @@
   <div>
     <app-navbar></app-navbar>
     <div class="my-groups-wrapper">
-      <logout-button class="logout-button"></logout-button>
       <div class="container">
         <h1>Meus Grupos</h1>
         <div class="input-container">
@@ -57,13 +56,12 @@
 import axios from 'axios';
 import { mapState } from 'vuex';
 import AppNavbar from './AppNavbar.vue';
-import LogoutButton from './LogoutButton.vue';
+
 
 export default {
   name: 'MyGroups',
   components: {
     appNavbar: AppNavbar,
-    'logout-button': LogoutButton
   },
   data() {
     return {

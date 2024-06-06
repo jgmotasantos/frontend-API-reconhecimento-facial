@@ -11,6 +11,7 @@
         <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
+      <logout-button class="logout-button"></logout-button>
       <div class="toggle-btn" @click="toggleMenu">
         <i class="fas fa-bars"></i>
       </div>
@@ -30,8 +31,13 @@
 </template>
 
 <script>
+import LogoutButton from './LogoutButton.vue';
+
 export default {
   name: 'AppNavbar',
+  components: {
+    'logout-button': LogoutButton
+  },
   data() {
     return {
       menuOpen: false

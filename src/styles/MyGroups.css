@@ -10,12 +10,12 @@
 }
 
 .container {
-  width: 500px;
-  height: auto;
+  width: 1000px;
+  height: 700px;
   min-height: 400px;
   padding: 30px;
-  background-color: black;
-  border: 2px solid #e6b7eca1;
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
   border-radius: 10px;
   backdrop-filter: blur(15px);
 }
@@ -47,7 +47,7 @@ h1 {
 
 .group-input::placeholder,
 .filter-input::placeholder {
-  color: #bfbfbf;
+  color: #ffffff;
 }
 
 .add-button {
@@ -72,11 +72,11 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #463c7b;
+  background-color: #1c1c1c;
   border-radius: 5px;
   margin: 10px 0;
   padding: 10px 12px;
-  border: 2px solid #e6b7eca1;
+  border: 2px solid rgb(0, 98, 255);
   transition: all 0.2s ease;
 }
 
@@ -89,7 +89,7 @@ h1 {
 }
 
 .group:hover {
-  background-color:#e6b7eca1;
+  background-color:#00ff88a1;
 }
 
 .group label {
@@ -114,7 +114,7 @@ span::before {
   position: absolute;
   margin-left: -30px;
   border-radius: 100px;
-  border: 2px solid #e6b7eca1;
+  border: 2px solid #00ff88a1;
 }
 
 input[type='checkbox'] {
@@ -127,7 +127,7 @@ input:checked + span::before {
 }
 
 .group:hover span::before {
-  border-color: #eee;
+  border-color: #eeeeee;
 }
 
 .group .delete-btn  {
@@ -170,7 +170,7 @@ input:checked + span::before {
 .edit-selected {
   color: #eee;
   padding: 7px 15px;
-  border: 2px solid #e6b7eca1;
+  border: 2px solid rgb(0, 98, 255);
   border-radius: 5px;
   background-color: transparent;
   cursor: pointer;
@@ -178,7 +178,7 @@ input:checked + span::before {
 }
 
 .edit-selected:hover {
-  background-color: #e6b7eca1;
+  background-color: #00ff88a1;
 }
 
 .page-wrapper{
@@ -188,7 +188,8 @@ input:checked + span::before {
 }
 
 .my-groups-wrapper {
-  background-color: #0e0000; 
+  background: url(../assets/groupsbg.jpg); 
+  background-size: cover;
   display: flex;
   justify-content: center; 
   align-items: center; 
