@@ -12,12 +12,6 @@
           >
         </div>
         <div class="actions">
-          <button 
-            class="edit-selected" 
-            @click="editSelected"
-          >
-            Editar Selecionados
-          </button>
         </div>
         <div class="groups-container">
           <ul class="groups">
@@ -34,18 +28,22 @@
                 >
                 <span>{{ group.name }}</span>
               </label>
-              <button 
-                class="delete-btn" 
-                @click="removeGroup(index)"
-              >
-                <i class="fa fa-times"></i>
-              </button>
+              <div class="group-actions">
+                <button 
+                  class="view-more-btn" 
+                  @click="viewMore(group)"
+                >
+                  Ver Mais
+                </button>
+                <button 
+                  class="delete-btn" 
+                  @click="removeGroup(index)"
+                >
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
             </li>
           </ul>
-          <img 
-            class="empty-image" 
-            v-if="filteredGroups.length === 0"
-          >
         </div>
       </div>
     </div>
@@ -119,6 +117,11 @@ export default {
         });
         localStorage.setItem('groups', JSON.stringify(this.groupsJson));
       }
+    },
+    viewMore(group) {
+      // Lógica para redirecionar para a página de detalhes do grupo
+      // Por exemplo, você pode usar o router para navegar para outra página
+      this.$router.push({ name: 'GroupDetails', params: { groupId: group.id } });
     }
   }
 };
@@ -126,4 +129,24 @@ export default {
 
 <style scoped>
 @import '../styles/MyGroups.css';
+
+.group-actions {
+  display: flex;
+  align-items: center;
+}
+
+.view-more-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.view-more-btn:hover {
+  background-color: #0056b3;
+}
 </style>
