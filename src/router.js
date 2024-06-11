@@ -5,14 +5,16 @@ import MyGroups from './components/MyGroups.vue'
 import HomePage from './components/HomePage.vue'
 import GroupDetails from './components/GroupDetails.vue'
 import CreateGroup from './components/CreateGroup.vue'
+import AddMember from './components/AddMember.vue'
 
 const routes = [
   { path: '/auth/login', component: LoginForm },
   { path: '/auth/register', component: RegisterPage },
   { path: '/grupos', component: MyGroups },
   { path: '/home', component: HomePage },
-  { path: '/grupos/:nomeDoGrupo', component: GroupDetails },
-  { path: '/grupos/criar', component: CreateGroup }
+  { path: '/grupos/:nomeDoGrupo/detalhes', component: GroupDetails },
+  { path: '/grupos/criar', component: CreateGroup },
+  { path: '/grupos/:nomeDoGrupo/detalhes/adicionar', component: AddMember }
 ];
 
 const router = createRouter({

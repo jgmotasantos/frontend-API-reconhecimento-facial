@@ -119,7 +119,7 @@ export default {
     },
     viewMore(group) {
       console.log('Grupo selecionado:', group.name);
-      this.$router.push({ path: `/grupos/${group.name}` });
+      this.$router.push({ path: `/grupos/${group.name}/detalhes` });
     }
   }
 };

@@ -44,7 +44,7 @@ export default {
       const nomeDoGrupo = this.$route.params.nomeDoGrupo;
 
       try {
-        const response = await axios.get(`/grupos/${nomeDoGrupo}`, {
+        const response = await axios.get(`/grupos/${nomeDoGrupo}/detalhes`, {
           headers: {
             Authorization: `${authToken}`
           }
