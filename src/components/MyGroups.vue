@@ -55,7 +55,6 @@ import axios from 'axios';
 import { mapState } from 'vuex';
 import AppNavbar from './AppNavbar.vue';
 
-
 export default {
   name: 'MyGroups',
   components: {
@@ -119,9 +118,8 @@ export default {
       }
     },
     viewMore(group) {
-      // Lógica para redirecionar para a página de detalhes do grupo
-      // Por exemplo, você pode usar o router para navegar para outra página
-      this.$router.push({ name: 'GroupDetails', params: { groupId: group.id } });
+      console.log('Grupo selecionado:', group.name);
+      this.$router.push({ path: `/grupos/${group.name}` });
     }
   }
 };
