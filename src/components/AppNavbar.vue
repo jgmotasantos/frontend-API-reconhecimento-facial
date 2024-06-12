@@ -198,5 +198,5 @@ header {
         left: 2rem;
         width: unset;
     }
-}/* Adicione o CSS necessário para o Navbar */
+}
 </style>

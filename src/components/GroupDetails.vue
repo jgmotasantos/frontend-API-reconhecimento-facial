@@ -1,17 +1,15 @@
 <template>
-  <div class="container mt-5">
-    <div class="card">
-      <div class="card-body">
-        <div v-if="group">
-          <h1 class="card-title">{{ group.name }}</h1> <!-- Título do grupo -->
-          <p class="card-text"><strong>Criado em:</strong> {{ formatDate(group.createdAt) }}</p>
-          <!-- Future implementation for members -->
-          <!-- <div v-if="group.members">
-            <h2>Membros</h2>
-            <ul>
-              <li v-for="member in group.members" :key="member.id">{{ member.name }}</li>
-            </ul>
-          </div> -->
+  <div>
+    <members-navbar></members-navbar>
+    <div class="my-groups-wrapper">
+      <div class="container">
+        <h1>{{ group.name }}</h1>
+        <p>Criado em: {{ formatDate(group.created_at) }}</p>
+        <div class="members-list">
+          <div v-for="(member, index) in group.members" :key="index" class="member">
+            <img :src="member.photo_url" :alt="member.name" class="member-photo">
+            <span>{{ member.name }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -20,9 +18,13 @@
 
 <script>
 import axios from 'axios';
+import MembersNavbar from './MembersNavbar.vue';
 
 export default {
   name: 'GroupDetails',
+  components: {
+    membersNavbar: MembersNavbar,
+  },
   computed: {
     groupName() {
       return this.$route.params.nomeDoGrupo;
@@ -31,7 +33,6 @@ export default {
   data() {
     return {
       group: null,
-      responseData: null,
       error: null,
     };
   },
@@ -40,7 +41,7 @@ export default {
   },
   methods: {
     async fetchGroupDetails() {
-      const authToken = localStorage.getItem('authToken'); // Obtém o authToken do local storage
+      const authToken = localStorage.getItem('authToken');
       const nomeDoGrupo = this.$route.params.nomeDoGrupo;
 
       try {
@@ -50,9 +51,10 @@ export default {
           }
         });
         this.group = response.data;
-        console.log('Sucesso:', response.data); // Log da resposta da API
+        console.log('Sucesso:', response.data);
       } catch (error) {
         console.error('Erro ao buscar os detalhes do grupo:', error.response ? error.response.data : error.message);
+        this.error = 'Erro ao buscar os detalhes do grupo.';
       }
     },
     formatDate(dateString) {
@@ -62,3 +64,20 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import '../styles/MyGroups.css';
+
+.member {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.member-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+</style>
