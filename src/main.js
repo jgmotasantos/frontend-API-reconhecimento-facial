@@ -4,7 +4,6 @@ import router from './router';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import store from './store';
 import ErrorDisplay from './components/GlobalErrorDisplay.vue'; // Importe o componente global de exibição de erros
 
 axios.defaults.baseURL = 'http://localhost:8080';
@@ -45,5 +44,4 @@ axios.interceptors.response.use(
 
 app
   .use(router)
-  .use(store)
   .mount('#app');
