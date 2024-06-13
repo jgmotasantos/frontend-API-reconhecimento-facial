@@ -53,11 +53,6 @@ export default {
     },
     async handleSubmit() {
       const nomeDoGrupo = this.$route.params.nomeDoGrupo;
-      const authToken = localStorage.getItem('authToken');
-      if (!authToken) {
-        alert('Token de autenticação não encontrado');
-        return;
-      }
 
       if (!this.name) {
         alert('Por favor, preencha o nome.');
@@ -84,13 +79,13 @@ export default {
           {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `${authToken}`,
             },
+            withCredentials: true // Assegura que os cookies serão enviados
           }
         );
         console.log('Sucesso:', response.data);
       } catch (error) {
-        console.error('Erro:', error.response.data);
+        console.error('Erro:', error.response ? error.response.data : error.message);
       }
     },
   },

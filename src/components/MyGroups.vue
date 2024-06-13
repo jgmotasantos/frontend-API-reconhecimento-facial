@@ -52,7 +52,6 @@
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
 import AppNavbar from './AppNavbar.vue';
 
 export default {
@@ -68,7 +67,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(['authToken']),
     filteredGroups() {
       if (Array.isArray(this.groupsJson)) {
         return this.groupsJson.filter(group => group.name.toLowerCase().includes(this.filter.toLowerCase()));
@@ -81,13 +79,7 @@ export default {
   },
   methods: {
     fetchGroups() {
-      const config = {
-        headers: {
-          Authorization: `${this.authToken}`
-        }
-      };
-
-      axios.get('/grupos', config)
+      axios.get('/grupos')
         .then(response => {
           if (Array.isArray(response.data.groups)) {
             this.groupsJson = response.data.groups;
@@ -95,7 +87,7 @@ export default {
             this.groupsJson = [];
           }
           localStorage.setItem('groups', JSON.stringify(this.groupsJson));
-          console.log(response.data)
+          console.log(response.data);
         })
         .catch(error => {
           console.error('Erro ao buscar grupos:', error.response.data);

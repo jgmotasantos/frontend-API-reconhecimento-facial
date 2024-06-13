@@ -41,15 +41,10 @@ export default {
   },
   methods: {
     async fetchGroupDetails() {
-      const authToken = localStorage.getItem('authToken');
       const nomeDoGrupo = this.$route.params.nomeDoGrupo;
 
       try {
-        const response = await axios.get(`/grupos/${nomeDoGrupo}/detalhes`, {
-          headers: {
-            Authorization: `${authToken}`
-          }
-        });
+        const response = await axios.get(`/grupos/${nomeDoGrupo}/detalhes`);
         this.group = response.data;
         console.log('Sucesso:', response.data);
       } catch (error) {

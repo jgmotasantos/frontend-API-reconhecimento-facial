@@ -8,6 +8,7 @@ import store from './store';
 import ErrorDisplay from './components/GlobalErrorDisplay.vue'; // Importe o componente global de exibição de erros
 
 axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.withCredentials = true;
 
 const app = createApp(App);
 

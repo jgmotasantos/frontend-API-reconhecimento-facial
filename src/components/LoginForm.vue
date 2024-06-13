@@ -35,7 +35,6 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -46,20 +45,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['saveAuthToken']),
     async submitForm() {
       try {
-        const response = await axios.post('http://localhost:8080/auth/login', {
+        const response = await axios.post('/auth/login', {
           email: this.email,
           password: this.password
         });
 
-        // Extrair o token do cabeçalho de resposta
-        const token = response.headers.authorization;
-
-        // Salvar o token no Vuex
-        this.saveAuthToken(token);
-
+        // Não é necessário extrair e salvar o token
         console.log('Sucesso:', response.data);
 
         // Redirecionar após o sucesso

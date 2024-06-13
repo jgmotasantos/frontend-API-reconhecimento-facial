@@ -2,7 +2,6 @@
     <div>
       <app-navbar></app-navbar>
       <div class="my-groups-wrapper">
-        <logout-button class="logout-button"></logout-button>
         <div class="container">
           <h1>Criar Grupo</h1>
           <div class="input-container">
@@ -37,15 +36,12 @@
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
 import AppNavbar from './AppNavbar.vue';
-import LogoutButton from './LogoutButton.vue';
 
 export default {
   name: 'CreateGroup',
   components: {
     AppNavbar,
-    LogoutButton
   },
   data() {
     return {
@@ -54,9 +50,6 @@ export default {
       successMessage: '',
       errorMessage: ''
     };
-  },
-  computed: {
-    ...mapState(['authToken'])
   },
   methods: {
     addGroup() {
@@ -67,13 +60,8 @@ export default {
       this.errorMessage = '';
 
       const newGroup = { name: this.newGroupName };
-      const config = {
-        headers: {
-          Authorization: `${this.authToken}`
-        }
-      };
 
-      axios.post('/grupos/criar', newGroup, config)
+      axios.post('/grupos/criar', newGroup)
         .then(response => {
           this.newGroupName = '';
           this.successMessage = 'Grupo adicionado com sucesso!';
@@ -88,20 +76,11 @@ export default {
         });
     },
     fetchData() {
-
-      // not working, cant get response from backendd
-
       this.loading = true;
       this.successMessage = '';
       this.errorMessage = '';
 
-      const config = {
-        headers: {
-          Authorization: `${this.authToken}`
-        }
-      };
-
-      axios.get('/grupos/criar', config)
+      axios.get('/grupos/criar')
         .then(response => {
           console.log('Dados obtidos:', response.data);
         })
@@ -118,7 +97,7 @@ export default {
     }
   }
 };
-</script>  
+</script>
 
 <style scoped>
   @import '../styles/MyGroups.css';
