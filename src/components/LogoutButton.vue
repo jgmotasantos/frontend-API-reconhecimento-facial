@@ -1,5 +1,5 @@
 <template>
-    <button @click="logout" class="btn btn-outline-secondary" style="background-color: #e6b7eca1; color: #fff;">Sair</button>
+    <button @click="logout" class="btn btn-outline-secondary" style="background-color: #FF0000; color: #fff;">Sair</button>
   </template>
   
 
