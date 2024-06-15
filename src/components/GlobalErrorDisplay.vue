@@ -1,7 +1,6 @@
 <template>
   <div v-if="visible" class="alert alert-danger alert-dismissible fade show global-error-display" role="alert">
     <strong>{{ errorType }}</strong> - {{ errorMessage }}
-    <button type="button" class="btn-close" aria-label="Close" @click="hideError"></button>
   </div>
 </template>
 
