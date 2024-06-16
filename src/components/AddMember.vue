@@ -81,7 +81,7 @@ export default {
       context.drawImage(this.$refs.video, 0, 0, canvas.width, canvas.height);
       const imageDataURL = canvas.toDataURL('image/jpeg');
       
-      // Armazenar a foto como base64
+      // Retirando prefixo
       this.photoData = imageDataURL.replace(/^data:image\/(jpeg);base64,/, '');
     },
     async handleSubmit() {
