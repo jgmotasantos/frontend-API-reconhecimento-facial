@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-navbar></app-navbar>
+    <app-navbar :currentGroupName="currentGroupName"></app-navbar>
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>Meus Grupos</h1>
@@ -57,13 +57,14 @@ import AppNavbar from './AppNavbar.vue';
 export default {
   name: 'MyGroups',
   components: {
-    appNavbar: AppNavbar,
+    'app-navbar': AppNavbar,
   },
   data() {
     return {
       filter: '',
       groupsJson: [],
       selectedGroups: [],
+      currentGroupName: null // Inicializar como null para não exibir o link "Criar Membro" inicialmente
     };
   },
   computed: {
@@ -98,19 +99,9 @@ export default {
       this.groupsJson.splice(index, 1);
       localStorage.setItem('groups', JSON.stringify(this.groupsJson));
     },
-    editSelected() {
-      if (this.selectedGroups.length === 0) return;
-      const newGroupName = prompt('Digite o novo nome para o grupo selecionado:', this.selectedGroups[0].name);
-      if (newGroupName && newGroupName.trim() !== '') {
-        this.selectedGroups.forEach(group => {
-          const groupIndex = this.groupsJson.findIndex(g => g.name === group.name);
-          this.$set(this.groupsJson, groupIndex, { name: newGroupName.trim() });
-        });
-        localStorage.setItem('groups', JSON.stringify(this.groupsJson));
-      }
-    },
     viewMore(group) {
       console.log('Grupo selecionado:', group.name);
+      this.currentGroupName = group.name; // Atualiza o nome do grupo selecionado
       this.$router.push({ path: `/grupos/${group.name}/detalhes` });
     }
   }

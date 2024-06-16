@@ -1,6 +1,6 @@
 <template>
   <div>
-    <members-navbar></members-navbar>
+    <members-navbar :groupName="groupName"></members-navbar>
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>{{ group.name }}</h1>
