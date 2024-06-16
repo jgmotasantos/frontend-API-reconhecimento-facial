@@ -8,7 +8,7 @@
           <li><router-link to="/services">Serviços</router-link></li>
           <li><router-link to="/contact">Contato</router-link></li>
           <li><router-link to="/grupos">Membros</router-link></li>
-          <li><router-link to="/grupos/criar">Criar Membro</router-link></li>
+          <li><router-link to="/grupos/:nomeDoGrupo/detalhes/adicionar">Criar Membro</router-link></li>
         </ul>
         <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
         <logout-button class="logout-button"></logout-button>
