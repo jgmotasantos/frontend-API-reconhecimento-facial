@@ -5,7 +5,7 @@
       <ul class="links">
         <li><router-link to="/grupos">Voltar pra seleção de grupos</router-link></li>
         <li><router-link :to="createMemberLink">Criar Membro</router-link></li>
-        <li><router-link to="">Acessar Sessoes</router-link></li>
+        <li><router-link to="">Acessar Sessões do Grupo</router-link></li>
       </ul>
       <router-link to="/auth/login" class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
