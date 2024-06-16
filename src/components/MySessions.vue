@@ -5,7 +5,7 @@
         <div class="container">
           <h1>Minhas Sessões</h1>
           <div v-if="sessionsJson.length === 0">
-            <p>Você ainda não possui nenhuma sessão.</p>
+            <p class="no-sessions-message">Você ainda não possui nenhuma sessão.</p>
           </div>
           <div v-else class="sessions-container">
             <ul class="sessions">
@@ -65,13 +65,13 @@
             console.error('Erro ao buscar sessões:', error.response.data);
             this.sessionsJson = [];
           });
-      },
-      viewMore(session) {
-        console.log('Sessão selecionada:', session.name);
-        this.$router.push({ path: `/sessoes/${session.name}/detalhes` });
+        },
+        viewMore(session) {
+          console.log('Sessão selecionada:', session.name);
+          this.$router.push({ path: `/sessoes/${session.name}/detalhes` });
+        }
       }
-    }
-  };
+    };
   </script>
   
   <style scoped>
@@ -95,6 +95,10 @@
   
   .view-more-btn:hover {
     background-color: #0056b3;
+  }
+  
+  .no-sessions-message {
+    color: white;
   }
   </style>
   

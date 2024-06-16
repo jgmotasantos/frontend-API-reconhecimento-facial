@@ -16,6 +16,10 @@
   border: 2px solid rgb(0, 98, 255);
   border-radius: 10px;
   backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Mantém o conteúdo alinhado ao topo */
 }
 
 h1 {
@@ -95,7 +99,6 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Removendo o CSS relacionado ao checkbox */
 span::before {
   content: "";
   height: 0;
@@ -106,7 +109,6 @@ span::before {
   border: none;
 }
 
-/* Removendo o CSS relacionado ao input checkbox */
 input[type='checkbox'] {
   display: none;
 }
@@ -180,8 +182,8 @@ input[type='checkbox'] {
   background-color: bisque;
 }
 
-.my-groups-wrapper {
-  background: url(../assets/groupsbg.jpg); 
+.my-sessions-wrapper {
+  background: url('../assets/groupsbg.jpg'); 
   background-size: cover;
   display: flex;
   justify-content: center; 
