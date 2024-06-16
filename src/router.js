@@ -22,4 +22,14 @@ const router = createRouter({
   routes
 });
 
+let lastRoute = '';
+
+router.beforeEach((to, from, next) => {
+  if (from.path !== '/') {
+    lastRoute = from.fullPath;
+  }
+  next();
+});
+
+export { router, lastRoute };
 export default router;

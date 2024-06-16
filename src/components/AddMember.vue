@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-navbar></app-navbar>
+    <addm-navbar></addm-navbar>
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>Criar Membro</h1>
@@ -45,12 +45,12 @@
 
 <script>
 import axios from 'axios';
-import AppNavbar from './AppNavbar.vue';
+import AddmNavbar from './AddmNavbar.vue';
 
 export default {
   name: 'CreateMember',
   components: {
-    AppNavbar,
+    AddmNavbar,
   },
   data() {
     return {
@@ -81,7 +81,7 @@ export default {
       context.drawImage(this.$refs.video, 0, 0, canvas.width, canvas.height);
       const imageDataURL = canvas.toDataURL('image/jpeg');
       
-      // Retirando prefixo
+      // Armazenar a foto como base64
       this.photoData = imageDataURL.replace(/^data:image\/(jpeg);base64,/, '');
     },
     async handleSubmit() {

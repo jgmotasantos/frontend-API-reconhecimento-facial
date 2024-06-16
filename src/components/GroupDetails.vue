@@ -67,6 +67,7 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  color: white;
 }
 
 .member-photo {
@@ -74,5 +75,9 @@ export default {
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+p{
+  color: white
 }
 </style>

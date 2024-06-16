@@ -3,8 +3,8 @@
     <div class="navbar">
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
-        <li><router-link to="/about">Sobre Nós</router-link></li>
-        <li><router-link to="/grupos">Meus Grupos</router-link></li>
+        <li @click="goBack" style="color: white;">Voltar aos detalhes</li>
+        <li><router-link to="/grupos">Grupos</router-link></li>
         <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
@@ -29,6 +29,7 @@
 
 <script>
 import LogoutButton from './LogoutButton.vue';
+import { router, lastRoute } from '@/router'; // Importe o router e a variável lastRoute
 
 export default {
   name: 'AppNavbar',
@@ -43,6 +44,13 @@ export default {
   methods: {
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
+    },
+    goBack() {
+      if (lastRoute) {
+        router.push(lastRoute);
+      } else {
+        router.push('/grupos'); // Fallback caso não haja uma última rota registrada
+      }
     }
   }
 };
