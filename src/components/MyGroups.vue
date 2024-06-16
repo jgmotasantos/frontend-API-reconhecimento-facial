@@ -20,26 +20,13 @@
               :key="index" 
               class="group"
             >
-              <label :for="'group-' + index">
-                <input 
-                  :id="'group-' + index" 
-                  type="checkbox" 
-                  v-model="selectedGroups"
-                >
-                <span>{{ group.name }}</span>
-              </label>
+              <span>{{ group.name }}</span>
               <div class="group-actions">
                 <button 
                   class="view-more-btn" 
                   @click="viewMore(group)"
                 >
                   Ver Mais
-                </button>
-                <button 
-                  class="delete-btn" 
-                  @click="removeGroup(index)"
-                >
-                  <i class="fa fa-times"></i>
                 </button>
               </div>
             </li>
@@ -49,6 +36,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -95,10 +83,6 @@ export default {
           this.groupsJson = [];
         });
     },
-    removeGroup(index) {
-      this.groupsJson.splice(index, 1);
-      localStorage.setItem('groups', JSON.stringify(this.groupsJson));
-    },
     viewMore(group) {
       console.log('Grupo selecionado:', group.name);
       this.currentGroupName = group.name; // Atualiza o nome do grupo selecionado
@@ -107,6 +91,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 @import '../styles/MyGroups.css';
@@ -130,4 +115,5 @@ export default {
 .view-more-btn:hover {
   background-color: #0056b3;
 }
+
 </style>

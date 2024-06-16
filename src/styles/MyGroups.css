@@ -1,5 +1,3 @@
-/* MyGroups.css */
-
 *,
 *::before,
 *::after {
@@ -89,74 +87,69 @@ h1 {
 }
 
 .group:hover {
-  background-color:#00ff88a1;
-}
-
-.group label {
-  cursor: pointer;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  font-family: 'Roboto', sans-serif;
-  color: #eee;
+  background-color: #00ff88a1;
 }
 
 .group span {
-  padding-left: 20px;
-  position: relative;
-  cursor: pointer;
+  color: #eee;
+  font-family: 'Roboto', sans-serif;
 }
 
+/* Removendo o CSS relacionado ao checkbox */
 span::before {
   content: "";
-  height: 20px;
-  width: 20px;
+  height: 0;
+  width: 0;
   position: absolute;
-  margin-left: -30px;
-  border-radius: 100px;
-  border: 2px solid #00ff88a1;
-}
-
-input[type='checkbox'] {
-  visibility: hidden;
-}
-
-input:checked + span::before {
-  background: url(./check.svg) 50% 50% no-repeat #09bb21;
-  border-color: #09bb21;
-}
-
-.group:hover span::before {
-  border-color: #eeeeee;
-}
-
-.group .delete-btn  {
-  background-color: transparent;
+  margin-left: 0;
+  border-radius: 0;
   border: none;
-  cursor: pointer;
-  color: #eee;
-  font-size: 24px;
 }
 
-.groups-container  {
+/* Removendo o CSS relacionado ao input checkbox */
+input[type='checkbox'] {
+  display: none;
+}
+
+.group-actions {
+  display: flex;
+  align-items: center;
+}
+
+.view-more-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.view-more-btn:hover {
+  background-color: #0056b3;
+}
+
+.groups-container {
   height: 300px;
   overflow: overlay;
 }
 
-.groups-container::-webkit-scrollbar-track  {
+.groups-container::-webkit-scrollbar-track {
   background: rgb(247, 247, 247);
-  border-radius: 20px
+  border-radius: 20px;
 }
 
-.groups-container::-webkit-scrollbar  {
+.groups-container::-webkit-scrollbar {
   width: 0;
 }
 
-.groups-container:hover::-webkit-scrollbar  {
+.groups-container:hover::-webkit-scrollbar {
   width: 7px;
 }
 
-.groups-container::-webkit-scrollbar-thumb  {
+.groups-container::-webkit-scrollbar-thumb {
   background: #d5d5d5;
   border-radius: 20px;
 }
@@ -181,7 +174,7 @@ input:checked + span::before {
   background-color: #00ff88a1;
 }
 
-.page-wrapper{
+.page-wrapper {
   display: flex;
   align-items: center;
   background-color: bisque;
