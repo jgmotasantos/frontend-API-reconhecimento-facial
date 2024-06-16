@@ -3,9 +3,7 @@
     <div class="navbar">
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
-        <li @click="goBack" style="color: white;">Voltar aos detalhes</li>
-        <li><router-link to="/grupos">Grupos</router-link></li>
-        <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
+        <li @click="goBack" style="color: white;">Voltar aos detalhes do grupo</li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
