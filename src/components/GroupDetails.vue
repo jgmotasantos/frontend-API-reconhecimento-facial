@@ -4,11 +4,14 @@
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>{{ group.name }}</h1>
-        <p>Criado em: {{ formatDate(group.created_at) }}</p>
+        <p>Criado em: {{ formatDate(group.createdAt) }}</p>
         <div class="members-list">
           <div v-for="(member, index) in group.members" :key="index" class="member">
-            <img :src="member.photo_url" :alt="member.name" class="member-photo">
-            <span>{{ member.name }}</span>
+            <img :src="getMemberPhoto(member.face)" :alt="member.name" class="member-photo">
+            <div class="member-details">
+              <span>{{ member.name }}</span>
+              <p>Adicionado em: {{ formatDate(member.addedAt) }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -56,6 +59,9 @@ export default {
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
       return new Date(dateString).toLocaleDateString('pt-BR', options);
     },
+    getMemberPhoto(faceBase64) {
+      return `data:image/jpeg;base64,${faceBase64}`;
+    }
   },
 };
 </script>
@@ -77,7 +83,12 @@ export default {
   margin-right: 10px;
 }
 
-p{
-  color: white
+.member-details {
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  color: white;
 }
 </style>
