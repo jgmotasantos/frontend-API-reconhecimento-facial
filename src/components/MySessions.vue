@@ -1,6 +1,6 @@
 <template>
     <div>
-      <app-navbar :currentGroupName="groupName"></app-navbar>
+      <mys-navbar></mys-navbar>  
       <div class="my-sessions-wrapper">
         <div class="container">
           <h1>Minhas Sessões Encerradas</h1>
@@ -20,12 +20,12 @@
   
   <script>
   import axios from 'axios';
-  import AppNavbar from './AppNavbar.vue';
+  import MysNavbar from './MysNavbar.vue';
   
   export default {
     name: 'MySessions',
     components: {
-      'app-navbar': AppNavbar,
+      'mys-navbar': MysNavbar,
     },
     data() {
       return {
