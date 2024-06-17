@@ -40,27 +40,27 @@
       }
     },
     mounted() {
-      this.fetchSessions();
-    },
+  this.fetchSessions();
+},
     methods: {
-      fetchSessions() {
-        this.loading = true;
-        this.errorMessage = '';
-        axios.get(`/grupos/${this.groupName}/sessoes/encerradas`)
-          .then(response => {
-            this.sessions = response.data.sessions;
-          })
-          .catch(error => {
-            this.errorMessage = 'Erro ao buscar sessões encerradas.';
-            console.error('Erro ao buscar sessões:', error.response ? error.response.data : error.message);
-          })
-          .finally(() => {
-            this.loading = false;
-          });
-      },
-      formatDate(dateString) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        return new Date(dateString).toLocaleDateString('pt-BR', options);
+        fetchSessions() {
+            this.loading = true;
+            this.errorMessage = '';
+            axios.get(`http://localhost:8000/grupos/${this.groupName}/sessoes/encerradas`)  // Adicione a URL completa do servidor
+            .then(response => {
+                this.sessions = response.data.sessions;
+            })
+            .catch(error => {
+                this.errorMessage = 'Erro ao buscar sessões encerradas.';
+                console.error('Erro ao buscar sessões:', error.response ? error.response.data : error.message);
+            })
+            .finally(() => {
+                this.loading = false;
+            });
+        },
+        formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            return new Date(dateString).toLocaleDateString('pt-BR', options);
       }
     }
   };

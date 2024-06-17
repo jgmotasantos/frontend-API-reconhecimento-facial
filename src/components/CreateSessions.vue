@@ -52,29 +52,20 @@
       };
     },
     methods: {
-      addSession() {
-        if (this.newSessionName.trim() === '') return;
-  
-        this.loading = true;
-        this.successMessage = '';
-        this.errorMessage = '';
-  
-        const newSession = { name: this.newSessionName };
-  
-        axios.post('/grupos/{nome-do-grupo}/sessoes/iniciar', newSession)
-          .then(response => {
-            this.newSessionName = '';
-            this.successMessage = 'Sessão adicionada com sucesso!';
-            this.$emit('session-added');
-            console.log(response.data);
-          })
-          .catch(error => {
-            this.errorMessage = 'Erro ao adicionar sessão.';
-            console.log(error.response.data);
-          })
-          .finally(() => {
-            this.loading = false;
-          });
+  createSession() {
+    this.loading = true;
+    this.errorMessage = '';
+    axios.post(`http://localhost:8000/grupos/${this.groupName}/sessoes/iniciar`, { sessionData: this.sessionData })  // Adicione a URL completa do servidor
+      .then(response => {
+        console.log('Sessão iniciada com sucesso:', response.data);
+      })
+      .catch(error => {
+        this.errorMessage = 'Erro ao iniciar a sessão.';
+        console.error('Erro ao iniciar a sessão:', error.response ? error.response.data : error.message);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
       }
     }
   };
