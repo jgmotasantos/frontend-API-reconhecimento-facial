@@ -51,7 +51,9 @@
     },
     methods: {
       fetchSessions() {
-        axios.get('/sessoes')
+        // A URL deve ser ajustada conforme a estrutura do seu back-end. 
+        // Supondo que `currentGroupName` contém o nome do grupo:
+        axios.get(`/grupos/${this.currentGroupName}/sessoes/encerradas`)
           .then(response => {
             if (Array.isArray(response.data.sessions)) {
               this.sessionsJson = response.data.sessions;
@@ -65,13 +67,13 @@
             console.error('Erro ao buscar sessões:', error.response.data);
             this.sessionsJson = [];
           });
-        },
-        viewMore(session) {
-          console.log('Sessão selecionada:', session.name);
-          this.$router.push({ path: `/sessoes/${session.name}/detalhes` });
-        }
+      },
+      viewMore(session) {
+        console.log('Sessão selecionada:', session.name);
+        this.$router.push({ path: `/sessoes/${session.name}/detalhes` });
       }
-    };
+    }
+  };
   </script>
   
   <style scoped>

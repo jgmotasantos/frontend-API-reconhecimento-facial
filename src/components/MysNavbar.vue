@@ -3,9 +3,10 @@
       <div class="navbar">
         <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
         <ul class="links">
-          <li><router-link to="/about">Presenças em Andamento</router-link></li>
-          <li><router-link to="/grupos">Minhas Presenças</router-link></li>
-          <li><router-link to="/grupos/criar">Criar Presença</router-link></li>
+            <li @click="goBack" style="color: white;">Voltar aos detalhes do grupo</li>
+            <li><router-link to="/about">Presenças em Andamento</router-link></li>
+            <li><router-link to="/sessoes/iniciar">Minhas Presenças</router-link></li>
+            <li><router-link to="/grupos/criar">Criar Presença</router-link></li>
         </ul>
         <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
         <logout-button class="logout-button"></logout-button>
@@ -29,6 +30,8 @@
   
   <script>
   import LogoutButton from './LogoutButton.vue';
+  import { router, lastRoute } from '@/router'; // Importe o router e a variável lastRoute
+
   
   export default {
     name: 'MysNavbar',
@@ -43,7 +46,14 @@
     methods: {
       toggleMenu() {
         this.menuOpen = !this.menuOpen;
+      },
+      goBack() {
+      if (lastRoute) {
+        router.push(lastRoute);
+      } else {
+        router.push('/grupos'); // Fallback caso não haja uma última rota registrada
       }
+    }
     }
   };
   </script>
