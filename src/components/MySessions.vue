@@ -1,6 +1,6 @@
 <template>
     <div>
-      <mys-navbar></mys-navbar>  
+      <mys-navbar  :groupName="groupName"></mys-navbar>  
       <div class="my-sessions-wrapper">
         <div class="container">
           <h1>Minhas Sessões Encerradas</h1>
