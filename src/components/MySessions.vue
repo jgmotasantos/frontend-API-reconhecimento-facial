@@ -1,31 +1,18 @@
 <template>
     <div>
-      <mys-navbar :currentGroupName="currentGroupName"></mys-navbar>
+      <app-navbar :currentGroupName="groupName"></app-navbar>
       <div class="my-sessions-wrapper">
         <div class="container">
-          <h1>Minhas Sessões</h1>
-          <div v-if="sessionsJson.length === 0">
-            <p class="no-sessions-message">Você ainda não possui nenhuma sessão.</p>
-          </div>
-          <div v-else class="sessions-container">
-            <ul class="sessions">
-              <li 
-                v-for="(session, index) in sessionsJson" 
-                :key="index" 
-                class="session"
-              >
-                <span>{{ session.name }}</span>
-                <div class="session-actions">
-                  <button 
-                    class="view-more-btn" 
-                    @click="viewMore(session)"
-                  >
-                    Ver Mais
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <h1>Minhas Sessões Encerradas</h1>
+          <div v-if="loading" class="loading-message">Carregando sessões...</div>
+          <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+          <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão encerrada.</div>
+          <ul v-if="sessions.length > 0" class="sessions-list">
+            <li v-for="session in sessions" :key="session._id" class="session-item">
+              <h2>{{ session.name }}</h2>
+              <p>Encerrada em: {{ formatDate(session.endTime) }}</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -33,44 +20,47 @@
   
   <script>
   import axios from 'axios';
-  import MysNavbar from './MysNavbar.vue';
+  import AppNavbar from './AppNavbar.vue';
   
   export default {
     name: 'MySessions',
     components: {
-      'mys-navbar': MysNavbar,
+      'app-navbar': AppNavbar,
     },
     data() {
       return {
-        sessionsJson: [],
-        currentGroupName: null
+        sessions: [],
+        loading: false,
+        errorMessage: ''
       };
+    },
+    computed: {
+      groupName() {
+        return this.$route.params.nomeDoGrupo;
+      }
     },
     mounted() {
       this.fetchSessions();
     },
     methods: {
       fetchSessions() {
-        // A URL deve ser ajustada conforme a estrutura do seu back-end. 
-        // Supondo que `currentGroupName` contém o nome do grupo:
-        axios.get(`/grupos/${this.currentGroupName}/sessoes/encerradas`)
+        this.loading = true;
+        this.errorMessage = '';
+        axios.get(`/grupos/${this.groupName}/sessoes/encerradas`)
           .then(response => {
-            if (Array.isArray(response.data.sessions)) {
-              this.sessionsJson = response.data.sessions;
-            } else {
-              this.sessionsJson = [];
-            }
-            localStorage.setItem('sessions', JSON.stringify(this.sessionsJson));
-            console.log(response.data);
+            this.sessions = response.data.sessions;
           })
           .catch(error => {
-            console.error('Erro ao buscar sessões:', error.response.data);
-            this.sessionsJson = [];
+            this.errorMessage = 'Erro ao buscar sessões encerradas.';
+            console.error('Erro ao buscar sessões:', error.response ? error.response.data : error.message);
+          })
+          .finally(() => {
+            this.loading = false;
           });
       },
-      viewMore(session) {
-        console.log('Sessão selecionada:', session.name);
-        this.$router.push({ path: `/sessoes/${session.name}/detalhes` });
+      formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        return new Date(dateString).toLocaleDateString('pt-BR', options);
       }
     }
   };
@@ -79,28 +69,66 @@
   <style scoped>
   @import '../styles/MySessions.css';
   
-  .session-actions {
+  .my-sessions-wrapper {
+    background: url('../assets/sessionsbg.jpg');
+    background-size: cover;
     display: flex;
+    justify-content: center;
     align-items: center;
+    min-height: 100vh;
   }
   
-  .view-more-btn {
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 3px;
+  .container {
+    width: 1000px;
+    height: 700px;
+    min-height: 400px;
+    padding: 30px;
+    background-color: #1c1c1c;
+    border: 2px solid rgb(0, 98, 255);
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
   }
   
-  .view-more-btn:hover {
-    background-color: #0056b3;
+  h1 {
+    color: #eee;
+    text-align: center;
+    margin-bottom: 36px;
   }
   
-  .no-sessions-message {
-    color: white;
+  .loading-message, .error-message, .empty-message {
+    text-align: center;
+    margin-top: 20px;
+    color: #ffcc00;
+  }
+  
+  .error-message {
+    color: #ff4d4d;
+  }
+  
+  .empty-message {
+    color: #eee;
+  }
+  
+  .sessions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .session-item {
+    background-color: #1c1c1c;
+    border: 2px solid rgb(0, 98, 255);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .session-item h2 {
+    color: #eee;
+  }
+  
+  .session-item p {
+    color: #bbb;
   }
   </style>
   

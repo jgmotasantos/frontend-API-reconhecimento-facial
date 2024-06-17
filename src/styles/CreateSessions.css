@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container {
+  width: 1000px;
+  height: 700px;
+  min-height: 400px;
+  padding: 30px;
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  backdrop-filter: blur(15px);
+}
+
+h1 {
+  color: #eee;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.session-input {
+  flex: 1;
+  outline: none;
+  padding: 10px 10px 10px 20px;
+  background-color: transparent;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 30px;
+  color: #eee;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.session-input::placeholder {
+  color: #ffffff;
+}
+
+.add-button {
+  border: none;
+  outline: none;
+  background: rgb(0, 98, 255);
+  color: #fff;
+  font-size: 35px;
+  cursor: pointer;
+  border-radius: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.loading-message, .success-message, .error-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.loading-message {
+  color: #ffcc00;
+}
+
+.success-message {
+  color: #00ff88;
+}
+
+.error-message {
+  color: #ff4d4d;
+}
+
+.create-sessions-wrapper {
+  background: url('../assets/sessionsbg.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}

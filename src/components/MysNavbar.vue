@@ -6,7 +6,7 @@
             <li @click="goBack" style="color: white;">Voltar aos detalhes do grupo</li>
             <li><router-link to="/about">Presenças em Andamento</router-link></li>
             <li><router-link to="/sessoes/iniciar">Minhas Presenças</router-link></li>
-            <li><router-link to="/grupos/criar">Criar Presença</router-link></li>
+            <li><router-link to="/sessoes/criar">Criar Presença</router-link></li>
         </ul>
         <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
         <logout-button class="logout-button"></logout-button>

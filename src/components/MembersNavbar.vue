@@ -5,7 +5,7 @@
       <ul class="links">
         <li><router-link to="/grupos">Voltar pra seleção de grupos</router-link></li>
         <li><router-link :to="createMemberLink">Criar Membro</router-link></li>
-        <li><router-link to="">Acessar Sessões do Grupo</router-link></li>
+        <li><router-link :to="accessSessionsLink">Acessar Sessões do Grupo</router-link></li>
       </ul>
       <router-link to="/auth/login" class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
@@ -39,6 +39,9 @@ export default {
   computed: {
     createMemberLink() {
       return this.groupName ? `/grupos/${this.groupName}/detalhes/adicionar` : '#';
+    },
+    accessSessionsLink() {
+      return this.groupName ? `/grupos/${this.groupName}/sessoes/encerradas` : '#';
     }
   },
   methods: {
@@ -49,152 +52,150 @@ export default {
 };
 </script>
 
-  <style scoped>
-  *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+<style scoped>
+@import '../styles/MyGroups.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.back-wrapper {
+  margin-bottom: 10px;
+  background-color: #1c1c1c;
+}
+
+.new-body {
+  background: url('../assets/darkbackground.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  position: relative;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+a:hover {
+  color: rgb(0, 98, 255);
+}
+
+/* HEADER */
+header {
+  position: relative;
+  padding: 0 2rem;
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo a {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.navbar .links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar .toggle-btn {
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+.action-btn {
+  background-color: rgb(0, 98, 255);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold; 
+  cursor: pointer;
+  transition: scale 0.2s ease;  
+}   
+
+.action-btn:hover  {
+  scale: 1.05;
+  color: #fff;
+}
+
+.action-btn:active {
+  scale: 0.95;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 2rem;
+  top: 60px;
+  height: 0;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown-menu li {
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu .open {
+  height: 240px;
+}
+
+.dropdown-menu .action-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* DESIGN RESPONSIVO */
+
+@media (max-width: 992px) {
+  .navbar .links,
+  .navbar .action-btn {
+    display: none;
   }
-  
-  .back-wrapper {
-      margin-bottom: 10px;
-      background-color: #1c1c1c;
-  }
-  
-  .new-body {
-      background: url('../assets/darkbackground.jpg');
-      background-size: cover; 
-      background-position: center; 
-      background-repeat: no-repeat; 
-      position: relative;
-  }
-  
-  
-  
-  li {
-      list-style: none;
-  }
-  
-  a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1rem;
-  }
-  
-  a:hover {
-      color: rgb(0, 98, 255);
-  }
-  
-  /* HEADER */
-  header {
-      position: relative;
-      padding: 0 2rem;
-  }
-  
-  .navbar {
-      width: 100%;
-      height: 60px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  }
-  
-  .navbar .logo a {
-      font-size: 2rem;
-      font-weight: bold;
-  }
-  
-  .navbar .links {
-      display: flex;
-      gap: 2rem;
-  }
-  
+
   .navbar .toggle-btn {
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: none;
+    display: block;
   }
-  
-  .action-btn {
-      background-color: rgb(0, 98, 255);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border: none;
-      outline: none;
-      border-radius: 20px;
-      font-size: 0,8rem;
-      font-weight: bold; 
-      cursor: pointer;
-      transition: scale 0.2 ease;  
-  }   
-  
-  .action-btn:hover  {
-      scale: 1.05;
-      color: #fff;
-  }
-  
-  .action-btn:active {
-      scale: 0.95;
-  }
-  
+
   .dropdown-menu {
-      display: none;
-      position: absolute;
-      right: 2rem;
-      top: 60px;
-      height: 0;
-      width: 300px;
-      background: rgba(255,255,255,.2);
-      backdrop-filter: blur(15px);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: block;
   }
-  
-  .dropdown-menu li {
-      padding: 0.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .dropdown-menu {
+    left: 2rem;
+    width: unset;
   }
-  
-  .dropdown-menu .open {
-      height: 240px;
-  }
-  
-  .dropdown-menu .action-btn {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-  }
-  
-  
-  
-  /*DESIGN RESPONSIVO*/
-  
-  @media(max-width: 992px){
-      .navbar .links,
-      .navbar .action-btn {
-          display: none;
-      }
-  
-      .navbar .toggle-btn {
-          display: block;
-      }
-  
-      .dropdown-menu {
-          display: block;
-      }
-  }
-  
-  @media(max-width: 576px) {
-      .dropdown-menu {
-          left: 2rem;
-          width: unset;
-      }
-  }
-  </style>
+}
+</style>

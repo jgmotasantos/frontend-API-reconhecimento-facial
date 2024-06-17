@@ -7,7 +7,7 @@ import GroupDetails from './components/GroupDetails.vue'
 import CreateGroup from './components/CreateGroup.vue'
 import AddMember from './components/AddMember.vue'
 import MySessions from './components/MySessions.vue'
-
+import CreateSessions from './components/CreateSessions.vue'
 
 const routes = [
   { path: '/auth/login', component: LoginForm },
@@ -18,7 +18,8 @@ const routes = [
   { path: '/grupos/criar', component: CreateGroup },
   { path: '/grupos/:nomeDoGrupo/detalhes/adicionar', name: 'AddMember', component: AddMember },
   { path: '/sessoes/iniciar', component: MySessions },
-
+  { path: '/sessoes/criar',component: CreateSessions},
+  { path: '/grupos/:nomeDoGrupo/sessoes/encerradas', name: 'MySessions', component: MySessions }
 ];
 
 const router = createRouter({
