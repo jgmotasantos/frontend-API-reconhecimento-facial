@@ -4,13 +4,14 @@
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>{{ group.name }}</h1>
-        <p>Criado em: {{ formatDate(group.createdAt) }}</p>
+        <h2>Detalhes do Grupo:</h2>
+        <p class="group-created">Grupo criado em: {{ formatDate(group.createdAt) }}</p>
         <div class="members-list">
           <div v-for="(member, index) in group.members" :key="index" class="member">
             <img :src="getMemberPhoto(member.face)" :alt="member.name" class="member-photo">
             <div class="member-details">
-              <span>{{ member.name }}</span>
-              <p>Adicionado em: {{ formatDate(member.addedAt) }}</p>
+              <span class="member-name">{{ member.name }}</span>
+              <p class="member-date">Adicionado em: {{ formatDate(member.addedAt) }}</p>
             </div>
           </div>
         </div>
@@ -67,25 +68,40 @@ export default {
 </script>
 
 <style scoped>
-@import '../styles/MyGroups.css';
+@import '../styles/GroupDetails.css';
+
+.group-created {
+  margin-bottom: 20px; /* Adicionando margem inferior ao texto */
+}
 
 .member {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid white;
   color: white;
 }
 
 .member-photo {
-  width: 40px;
-  height: 40px;
+  width: 60px; /* Aumentando o tamanho da foto */
+  height: 60px; /* Aumentando o tamanho da foto */
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .member-details {
   display: flex;
   flex-direction: column;
+}
+
+.member-name {
+  font-size: 1.2em; /* Aumentando o tamanho do nome */
+  font-weight: bold; /* Deixando o nome em negrito */
+}
+
+.member-date {
+  font-size: 1em; /* Aumentando o tamanho da data */
 }
 
 p {
