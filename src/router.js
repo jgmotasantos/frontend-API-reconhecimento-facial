@@ -8,7 +8,8 @@ import CreateGroup from './components/CreateGroup.vue';
 import AddMember from './components/AddMember.vue';
 import MySessions from './components/MySessions.vue';
 import CreateSessions from './components/CreateSessions.vue';
-import OpenSessions from './components/OpenSessions.vue'; // Importando a nova página
+import OpenSessions from './components/OpenSessions.vue';
+import SessionsDetails from './components/SessionsDetails.vue'; // Importe o novo componente
 
 const routes = [
   { path: '/auth/login', component: LoginForm },
@@ -20,7 +21,8 @@ const routes = [
   { path: '/grupos/:nomeDoGrupo/detalhes/adicionar', name: 'AddMember', component: AddMember },
   { path: '/grupos/:nomeDoGrupo/sessoes/encerradas', name: 'MySessions', component: MySessions },
   { path: '/grupos/:nomeDoGrupo/sessoes/iniciar', name: 'CreateSessions', component: CreateSessions },
-  { path: '/grupos/:nomeDoGrupo/sessoes/em-andamento', name: 'OpenSessions', component: OpenSessions }, // Nova rota para sessões em andamento
+  { path: '/grupos/:nomeDoGrupo/sessoes/em-andamento', name: 'OpenSessions', component: OpenSessions },
+  { path: '/grupos/:nomeDoGrupo/sessoes/:nomeDaSessao/detalhes', name: 'SessionsDetails', component: SessionsDetails }, // Nova rota para detalhes da sessão
   { path: '/sessoes/iniciar', redirect: '/grupos/:nomeDoGrupo/sessoes/iniciar' } // Redireciona para a rota com nomeDoGrupo
 ];
 
