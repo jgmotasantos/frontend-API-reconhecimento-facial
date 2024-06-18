@@ -5,7 +5,7 @@
       <ul class="links">
         <li @click="goBack" style="color: white;">Voltar</li>
         <li><router-link to="/about">Presenças em Andamento</router-link></li>
-        <li><router-link :to="createSessionLink">Minhas Presenças</router-link></li>
+        <li><router-link :to="accessSessionsLink">Minhas Presenças</router-link></li>
         <li><router-link :to="createSessionLink">Criar Presença</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
@@ -50,6 +50,9 @@ export default {
   computed: {
     createSessionLink() {
       return `/grupos/${this.groupName}/sessoes/iniciar`;
+    },
+    accessSessionsLink() {
+      return this.groupName ? `/grupos/${this.groupName}/sessoes/encerradas` : '#';
     }
   },
   methods: {

@@ -67,7 +67,7 @@ export default {
 @import '../styles/MySessions.css';
 
 .my-sessions-wrapper {
-  background: url('../assets/sessionsbg.jpg');
+  background: url("../assets/sessionsbg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
