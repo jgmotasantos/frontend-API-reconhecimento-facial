@@ -58,32 +58,25 @@ h1 {
   height: 40px;
 }
 
-.add-button:hover {
-  background-color: #0056b3;
-}
-
 .loading-message, .success-message, .error-message {
   text-align: center;
+  color: #eee;
   margin-top: 20px;
 }
 
-.loading-message {
-  color: #ffcc00;
-}
-
 .success-message {
-  color: #00ff88;
+  color: #00ff88a1;
 }
 
 .error-message {
-  color: #ff4d4d;
+  color: #ff0000;
 }
 
 .create-sessions-wrapper {
-  background: url('../assets/sessionsbg.jpg');
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: url(../assets/sessionsbg.jpg);
+  background-size: cover;
 }
