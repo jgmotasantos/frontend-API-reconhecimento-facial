@@ -17,10 +17,9 @@ const routes = [
   { path: '/grupos/:nomeDoGrupo/detalhes', name: 'GroupDetails', component: GroupDetails },
   { path: '/grupos/criar', component: CreateGroup },
   { path: '/grupos/:nomeDoGrupo/detalhes/adicionar', name: 'AddMember', component: AddMember },
-  { path: '/sessoes/iniciar', component: MySessions },
-  { path: '/sessoes/criar', component: CreateSessions },
   { path: '/grupos/:nomeDoGrupo/sessoes/encerradas', name: 'MySessions', component: MySessions },
-  { path: '/grupos/:nomeDoGrupo/sessoes/iniciar', name: 'CreateSessions', component: CreateSessions } // Adicionada a nova rota
+  { path: '/grupos/:nomeDoGrupo/sessoes/iniciar', name: 'CreateSessions', component: CreateSessions },
+  { path: '/sessoes/iniciar', redirect: '/grupos/:nomeDoGrupo/sessoes/iniciar' } // Redireciona para a rota com nomeDoGrupo
 ];
 
 const router = createRouter({

@@ -5,7 +5,7 @@
       <ul class="links">
         <li @click="goBack" style="color: white;">Voltar aos detalhes do grupo</li>
         <li><router-link to="/about">Presenças em Andamento</router-link></li>
-        <li><router-link to="/sessoes/iniciar">Minhas Presenças</router-link></li>
+        <li><router-link :to="createSessionLink">Minhas Presenças</router-link></li>
         <li><router-link :to="createSessionLink">Criar Presença</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
@@ -30,7 +30,6 @@
 
 <script>
 import LogoutButton from './LogoutButton.vue';
-import { router, lastRoute } from '@/router';
 
 export default {
   name: 'MysNavbar',
@@ -58,10 +57,8 @@ export default {
       this.menuOpen = !this.menuOpen;
     },
     goBack() {
-      if (lastRoute) {
-        router.push(lastRoute);
-      } else {
-        router.push('/grupos'); // Fallback caso não haja uma última rota registrada
+      if (this.$router) { // Adicionado uso do router aqui
+        this.$router.back();
       }
     }
   }
