@@ -18,6 +18,25 @@
   backdrop-filter: blur(15px);
 }
 
+.container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .container::-webkit-scrollbar-track {
+    background: #1c1c1c; /* Cor do fundo da barra de rolagem */
+    border-radius: 10px;
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 98, 255); /* Cor do polegar da barra de rolagem */
+    border-radius: 10px;
+    border: 1px solid #1c1c1c; /* Remover o fundo branco */
+  }
+  
+  .container::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3; /* Cor do polegar da barra de rolagem quando em hover */
+  }
+
 h1 {
   color: #eee;
   text-align: center;
