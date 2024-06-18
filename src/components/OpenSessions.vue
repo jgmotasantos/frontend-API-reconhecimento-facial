@@ -8,9 +8,9 @@
           <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
           <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão em andamento.</div>
           <ul v-if="sessions.length > 0" class="sessions-list">
-            <li v-for="session in sessions" :key="session._id" class="session-item">
+            <li v-for="session in sessions" :key="session.id" class="session-item">
               <h2>{{ session.name }}</h2>
-              <p>Iniciada em: {{ formatDate(session.startTime) }}</p>
+              <p>Iniciada em: {{ formatDate(session.startedAt) }}</p>
             </li>
           </ul>
         </div>
@@ -42,7 +42,7 @@
       fetchSessions() {
         this.loading = true;
         this.errorMessage = '';
-        axios.get(`http://localhost:8000/grupos/${this.groupName}/sessoes/em-andamento`)
+        axios.get(`http://localhost:8080/grupos/${this.groupName}/sessoes/em-andamento`)
           .then(response => {
             this.sessions = response.data.sessions;
           })

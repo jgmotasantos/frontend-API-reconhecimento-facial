@@ -46,17 +46,6 @@ h1 {
   color: #ffffff;
 }
 
-.add-button {
-  border: none;
-  outline: none;
-  background: rgb(0, 98, 255);
-  color: #fff;
-  font-size: 35px;
-  cursor: pointer;
-  border-radius: 40px;
-  width: 40px;
-  height: 40px;
-}
 
 .loading-message, .success-message, .error-message {
   text-align: center;
