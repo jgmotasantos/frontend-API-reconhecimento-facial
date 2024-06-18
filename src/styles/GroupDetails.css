@@ -24,12 +24,6 @@ h1 {
   margin-bottom: 36px;
 }
 
-h2 {
-    color: #eee;
-    text-align: center;
-    margin-bottom: 36px;
-  }
-
 .input-container {
   display: flex;
   justify-content: space-between;
