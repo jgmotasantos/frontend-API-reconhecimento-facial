@@ -3,11 +3,11 @@
       <sd-navbar :groupName="groupName"></sd-navbar>
       <div class="session-details-wrapper">
         <div class="container">
-          <h1>Detalhes da Sessão</h1>
+          <h1>{{ sessionName }}</h1>
+          <h2>Detalhes da Sessão</h2>
           <div v-if="loading" class="loading-message">Carregando detalhes da sessão...</div>
           <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
           <div v-if="session" class="session-info">
-            <h2>{{ session.name }}</h2>
             <p>Iniciada em: {{ formatDate(session.startedAt) }}</p>
             <p>Encerrada em: {{ formatDate(session.endedAt) }}</p>
             <div v-if="session.members.length" class="members-list">
@@ -60,14 +60,14 @@
           .finally(() => {
             this.loading = false;
           });
-      },
-      formatDate(dateString) {
-        if (!dateString) return 'N/A';
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        return new Date(dateString).toLocaleDateString('pt-BR', options);
+        },
+        formatDate(dateString) {
+          if (!dateString) return 'N/A';
+          const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+          return new Date(dateString).toLocaleDateString('pt-BR', options);
+        }
       }
-    }
-  };
+    };
   </script>
   
   <style scoped>
@@ -98,6 +98,12 @@
     color: #eee;
     text-align: center;
     margin-bottom: 36px;
+  }
+  
+  h2 {
+    color: #eee;
+    text-align: center;
+    margin-bottom: 20px;
   }
   
   .loading-message, .error-message {
