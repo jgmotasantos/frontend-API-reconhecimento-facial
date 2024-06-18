@@ -4,6 +4,7 @@
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>{{ group.name }}</h1>
+        <h2>Detalhes do Grupo:</h2>
         <p class="group-created">Grupo criado em: {{ formatDate(group.createdAt) }}</p>
         <div class="members-list">
           <div v-for="(member, index) in group.members" :key="index" class="member">
@@ -67,7 +68,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../styles/MyGroups.css';
+@import '../styles/GroupDetails.css';
 
 .group-created {
   margin-bottom: 20px; /* Adicionando margem inferior ao texto */
