@@ -3,7 +3,7 @@
       <os-navbar :groupName="groupName"></os-navbar>
       <div class="open-sessions-wrapper">
         <div class="container">
-          <h1>Presenças em Andamento</h1>
+          <h1>Sessões em Andamento</h1>
           <div v-if="loading" class="loading-message">Carregando sessões...</div>
           <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
           <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão em andamento.</div>

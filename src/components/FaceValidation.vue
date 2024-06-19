@@ -8,7 +8,10 @@
         <div class="video-container">
           <video ref="video" class="video-box" width="320" height="240" autoplay></video>
         </div>
-        <button type="button" class="photo-button" @click="capturePhoto">Tirar Foto</button>
+        <div class="button-container">
+          <button type="button" class="photo-button" @click="capturePhoto">Tirar Foto</button>
+          <button type="button" class="end-session-button" @click="confirmEndSession">Encerrar esta sessão</button>
+        </div>
         
         <div v-if="showModal" class="modal">
           <div class="modal-content">
@@ -18,6 +21,14 @@
               <button class="validate-button" @click="validatePhoto">Validar Foto</button>
               <button class="retake-button" @click="retakePhoto">Tirar Foto Novamente</button>
             </div>
+          </div>
+        </div>
+
+        <div v-if="showEndSessionModal" class="modal">
+          <div class="modal-content">
+            <h3>Deseja mesmo encerrar esta sessão?</h3>
+            <button @click="endSession" class="confirm-btn">Sim</button>
+            <button @click="cancelEndSession" class="cancel-btn">Não</button>
           </div>
         </div>
 
@@ -46,6 +57,7 @@ export default {
       errorMessage: '',
       photoData: null,
       showModal: false,
+      showEndSessionModal: false,
       groupName: this.$route.params.nomeDoGrupo,
       sessionName: this.$route.params.nomeDaSessao,
     };
@@ -115,6 +127,24 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    confirmEndSession() {
+      this.showEndSessionModal = true;
+    },
+    cancelEndSession() {
+      this.showEndSessionModal = false;
+    },
+    async endSession() {
+      try {
+        await axios.post(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionName}/encerrar`, {}, {
+          withCredentials: true
+        });
+        this.successMessage = 'Sessão encerrada com sucesso!';
+        this.showEndSessionModal = false;
+      } catch (error) {
+        this.errorMessage = 'Erro ao encerrar a sessão.';
+        console.error('Erro ao encerrar a sessão:', error.response ? error.response.data : error.message);
+      }
     }
   }
 };
@@ -134,7 +164,7 @@ export default {
 
 .container {
   width: 700px;
-  height:550px;
+  height: 550px;
   min-height: 400px;
   padding: 30px;
   background-color: #1c1c1c;
@@ -162,6 +192,14 @@ p {
   margin-bottom: 20px;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 .photo-button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -169,11 +207,23 @@ p {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .photo-button:hover {
   background-color: #0056b3;
+}
+
+.end-session-button {
+  padding: 10px 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.end-session-button:hover {
+  background-color: #cc0000;
 }
 
 .loading-message, .success-message, .error-message {
@@ -214,6 +264,10 @@ p {
   max-width: 800px;
 }
 
+.modal-content h3 {
+  color: #fff; /* Cor branca para o texto */
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -249,6 +303,32 @@ p {
 }
 
 .validate-button:hover, .retake-button:hover {
+  background-color: #0056b3;
+}
+
+.confirm-btn, .cancel-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin: 10px;
+}
+
+.confirm-btn:hover {
+  background-color: #000;
+}
+
+.cancel-btn:hover {
+  background-color: #000;
+}
+
+.confirm-btn {
+  background-color: #ff4d4d;
+}
+
+.cancel-btn {
   background-color: #0056b3;
 }
 </style>

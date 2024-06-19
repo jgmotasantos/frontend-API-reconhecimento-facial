@@ -3,8 +3,7 @@
     <div class="navbar">
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
-        <li><router-link :to="backToDetails">Voltar aos detalhes do Grupo</router-link></li>
-        <li><router-link :to="accessSessionsLink">Minhas Presenças</router-link></li>
+        <li><router-link :to="accessSessionsLink">Voltar para Minhas Sessões</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
