@@ -23,7 +23,7 @@
   
   <script>
   import axios from 'axios';
-  import OsNavbar from './OsNavbar.vue';
+  import OsNavbar from './OpenSessionsNavbar.vue';
   
   export default {
     name: 'OpenSessions',

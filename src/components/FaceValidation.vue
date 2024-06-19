@@ -1,6 +1,6 @@
 <template>
   <div>
-    <os-navbar :groupName="groupName"></os-navbar>
+    <FaceValidationNavbar :groupName="groupName"></FaceValidationNavbar>
     <div class="face-validation-wrapper">
       <div class="container">
         <h1>Validar Face - {{ groupName }}</h1>
@@ -32,12 +32,12 @@
 
 <script>
 import axios from 'axios';
-import OsNavbar from './OsNavbar.vue';
+import FaceValidationNavbar from './FaceValidationNavbar.vue';
 
 export default {
   name: 'FaceValidation',
   components: {
-    OsNavbar,
+    FaceValidationNavbar,
   },
   data() {
     return {

@@ -20,7 +20,7 @@
 
 <script>
 import axios from 'axios';
-import MysNavbar from './MysNavbar.vue';
+import MysNavbar from './MySessionsNavbar.vue';
 
 export default {
   name: 'MySessions',

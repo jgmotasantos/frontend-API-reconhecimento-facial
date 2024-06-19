@@ -42,7 +42,7 @@
 
 <script>
 import axios from 'axios';
-import CreastsNavbar from './CreastsNavbar.vue';
+import CreastsNavbar from './CreateSessionNavbar.vue';
 
 export default {
   name: 'CreateSessions',

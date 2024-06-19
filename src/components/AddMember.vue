@@ -1,6 +1,6 @@
 <template>
   <div>
-    <addm-navbar></addm-navbar>
+    <AddmNavbar></AddmNavbar>
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>Criar Membro</h1>
@@ -45,7 +45,7 @@
 
 <script>
 import axios from 'axios';
-import AddmNavbar from './AddmNavbar.vue';
+import AddmNavbar from './AddMemberNavbar.vue';
 
 export default {
   name: 'CreateMember',

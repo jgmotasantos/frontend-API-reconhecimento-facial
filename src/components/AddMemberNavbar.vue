@@ -3,7 +3,7 @@
     <div class="navbar">
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
-        <li @click="goBack" style="color: white;">Voltar aos detalhes do grupo</li>
+        <li><router-link :to="backToDetails">Voltar aos Detalhes do Grupo</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
@@ -30,7 +30,7 @@ import LogoutButton from './LogoutButton.vue';
 import { router, lastRoute } from '@/router'; // Importe o router e a variável lastRoute
 
 export default {
-  name: 'AppNavbar',
+  name: 'AddMemberNavbar',
   components: {
     'logout-button': LogoutButton
   },
@@ -38,6 +38,14 @@ export default {
     return {
       menuOpen: false
     };
+  },
+  computed: {
+    groupName() {
+      return this.$route.params.nomeDoGrupo;
+    },
+    backToDetails() {
+      return this.groupName ? `/grupos/${this.groupName}/detalhes` : '#';
+    }
   },
   methods: {
     toggleMenu() {
@@ -74,8 +82,6 @@ export default {
     background-repeat: no-repeat; 
     position: relative;
 }
-
-
 
 li {
     list-style: none;
@@ -176,8 +182,6 @@ header {
     display: flex;
     justify-content: center;
 }
-
-
 
 /*DESIGN RESPONSIVO*/
 

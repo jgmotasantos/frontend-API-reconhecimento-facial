@@ -3,10 +3,9 @@
     <div class="navbar">
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
-        <li @click="goBack" style="color: white;">Voltar</li>
+        <li><router-link :to="backToDetails">Voltar aos Detalhes do Grupo</router-link></li>
         <li><router-link :to="openSessionsLink">Presenças em Andamento</router-link></li>
         <li><router-link :to="accessSessionsLink">Minhas Presenças</router-link></li>
-        <li><router-link :to="createSessionLink">Criar Presença</router-link></li>
       </ul>
       <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
@@ -56,7 +55,10 @@ export default {
     },
     openSessionsLink() {
       return this.groupName ? `/grupos/${this.groupName}/sessoes/em-andamento` : '#';
-    }
+    },
+    backToDetails() {
+        return this.groupName ? `/grupos/${this.groupName}/detalhes` : '#';
+      }
   },
   methods: {
     toggleMenu() {
