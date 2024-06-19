@@ -7,12 +7,15 @@
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão encerrada.</div>
-        <ul v-if="sessions.length > 0" class="sessions-list">
-          <li v-for="session in sessions" :key="session._id" class="session-item">
-            <h2>{{ session.name }}</h2>
-            <p>Encerrada em: {{ formatDate(session.endTime) }}</p>
-          </li>
-        </ul>
+        <div v-if="sessions.length > 0" class="sessions-list">
+          <div v-for="session in sessions" :key="session.id" class="session-item">
+            <div class="session-info">
+              <h2>{{ session.name }}</h2>
+              <p>Encerrada em: {{ formatDate(session.endedAt) }}</p>
+            </div>
+            <button class="view-more-btn" @click="viewDetails(session.name)">Ver Mais</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +45,7 @@ export default {
     fetchSessions() {
       this.loading = true;
       this.errorMessage = '';
-      axios.get(`http://localhost:8000/grupos/${this.groupName}/sessoes/encerradas`)
+      axios.get(`http://localhost:8080/grupos/${this.groupName}/sessoes/encerradas`)
         .then(response => {
           this.sessions = response.data.sessions;
         })
@@ -57,11 +60,13 @@ export default {
     formatDate(dateString) {
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
       return new Date(dateString).toLocaleDateString('pt-BR', options);
+    },
+    viewDetails(sessionName) {
+      this.$router.push({ path: `/grupos/${this.groupName}/sessoes/${sessionName}/detalhes` });
     }
   }
 };
 </script>
-
 
 <style scoped>
 @import '../styles/MySessions.css';
@@ -84,6 +89,27 @@ export default {
   border: 2px solid rgb(0, 98, 255);
   border-radius: 10px;
   backdrop-filter: blur(15px);
+  overflow-y: auto; /* Adicionando barra de rolagem */
+}
+
+/* Estilos para a barra de rolagem */
+.container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: #1c1c1c; /* Cor do fundo da barra de rolagem */
+  border-radius: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 98, 255); /* Cor do polegar da barra de rolagem */
+  border-radius: 10px;
+  border: 1px solid #1c1c1c; /* Remover o fundo branco */
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; /* Cor do polegar da barra de rolagem quando em hover */
 }
 
 h1 {
@@ -110,21 +136,50 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 500px; /* Altura máxima da lista */
+  overflow-y: auto; /* Barra de rolagem vertical */
 }
 
 .session-item {
   background-color: #1c1c1c;
   border: 2px solid rgb(0, 98, 255);
   border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 10px; /* Diminuindo o padding */
+  margin-bottom: 10px; /* Diminuindo a margem */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.session-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .session-item h2 {
   color: #eee;
+  font-size: 1.2em; /* Diminuindo o tamanho da fonte */
+  margin: 0;
 }
 
 .session-item p {
   color: #bbb;
+  font-size: 0.9em; /* Diminuindo o tamanho da fonte */
+  margin: 0;
+}
+
+.view-more-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+.view-more-btn:hover {
+  background-color: #0056b3;
 }
 </style>
