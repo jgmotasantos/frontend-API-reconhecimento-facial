@@ -3,8 +3,8 @@
     <members-navbar :groupName="groupName"></members-navbar>
     <div class="my-groups-wrapper">
       <div class="container">
+        <h4>Detalhes do Grupo:</h4>
         <h1>{{ group.name }}</h1>
-        <h2>Detalhes do Grupo:</h2>
         <p class="group-created">Grupo criado em: {{ formatDate(group.createdAt) }}</p>
         <div class="members-list">
           <div v-for="(member, index) in group.members" :key="index" class="member">

@@ -75,10 +75,11 @@ export default {
       };
 
       axios.post(`http://localhost:8080/grupos/${this.groupName}/sessoes/iniciar`, sessionData)
-        .then(() => {
+        .then(response => {
           this.successMessage = 'Sessão iniciada com sucesso.';
           this.newSessionName = '';
           this.maxAttendance = 0;
+          console.log(response.data); // Logando a resposta do servidor no console
         })
         .catch(error => {
           this.errorMessage = 'Erro ao iniciar a sessão.';

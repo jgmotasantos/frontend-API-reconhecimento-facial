@@ -1,38 +1,42 @@
 <template>
-    <div>
-      <app-navbar></app-navbar>
-      <div class="my-groups-wrapper">
-        <div class="container">
-          <h1>Criar Grupo</h1>
-          <div class="input-container">
-            <input 
-              class="group-input" 
-              placeholder="Adicionar novo grupo..." 
-              v-model="newGroupName" 
-              @keyup.enter="addGroup" 
-              :disabled="loading"
-            >
-            <button 
-              class="add-button" 
-              @click="addGroup" 
-              :disabled="loading"
-            >
-              <i class="fa fa-plus-circle"></i>
-            </button>
-          </div>
-          <div v-if="loading" class="loading-message">
-            Adicionando grupo...
-          </div>
-          <div v-if="successMessage" class="success-message">
-            {{ successMessage }}
-          </div>
-          <div v-if="errorMessage" class="error-message">
-            {{ errorMessage }}
-          </div>
+  <div>
+    <app-navbar></app-navbar>
+    <div class="my-groups-wrapper">
+      <div class="container">
+        <h1>Criar Grupo</h1>
+        <p class="description">
+          Preencha o nome do novo grupo no campo abaixo e clique no botão para adicionar. <br>
+          Grupos não podem ter nomes repetidos.
+        </p>
+        <div class="input-container">
+          <input 
+            class="group-input" 
+            placeholder="Adicionar novo grupo..." 
+            v-model="newGroupName" 
+            @keyup.enter="addGroup" 
+            :disabled="loading"
+          >
+          <button 
+            class="add-button" 
+            @click="addGroup" 
+            :disabled="loading"
+          >
+            <i class="fa fa-plus-circle"></i>
+          </button>
+        </div>
+        <div v-if="loading" class="loading-message">
+          Adicionando grupo...
+        </div>
+        <div v-if="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+        <div v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 import axios from 'axios';
@@ -100,6 +104,11 @@ export default {
 </script>
 
 <style scoped>
-  @import '../styles/MyGroups.css';
-  </style>
-  
+@import '../styles/MyGroups.css';
+
+.description {
+  color: #eee;
+  text-align: center;
+  margin-bottom: 20px;
+}
+</style>

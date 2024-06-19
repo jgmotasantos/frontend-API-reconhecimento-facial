@@ -2,7 +2,7 @@
   <div>
     <app-navbar :currentGroupName="currentGroupName"></app-navbar>
     <div class="my-groups-wrapper">
-      <div class="container">
+      <div class="container-with-filter">
         <h1>Meus Grupos</h1>
         <div class="input-container">
           <input 
