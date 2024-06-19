@@ -13,7 +13,7 @@
                 <h2>{{ session.name }}</h2>
                 <p>Iniciada em: {{ formatDate(session.startedAt) }}</p>
               </div>
-              <button class="view-more-btn" @click="viewMore(session.name)">Ver Mais</button>
+              <button class="view-more-btn" @click="validateFaces(session.name)">Validar Faces</button>
             </div>
           </div>
         </div>
@@ -61,8 +61,8 @@
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
         return new Date(dateString).toLocaleDateString('pt-BR', options);
       },
-      viewMore(sessionName) {
-        this.$router.push({ path: `/grupos/${this.groupName}/sessoes/${sessionName}/detalhes` });
+      validateFaces(sessionName) {
+        this.$router.push({ path: `/grupos/${this.groupName}/sessoes/${sessionName}/validar-face` });
       }
     }
   };
@@ -181,4 +181,3 @@
     background-color: #0056b3;
   }
   </style>
-  
