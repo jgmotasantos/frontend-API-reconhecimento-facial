@@ -48,6 +48,7 @@ export default {
       axios.get(`http://localhost:8080/grupos/${this.groupName}/sessoes/encerradas`)
         .then(response => {
           this.sessions = response.data.sessions;
+          console.log('Sessões encerradas:', response.data); // Adicionando o log aqui
         })
         .catch(error => {
           this.errorMessage = 'Erro ao buscar sessões encerradas.';

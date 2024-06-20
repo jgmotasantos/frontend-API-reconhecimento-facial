@@ -12,6 +12,7 @@
             <div class="member-details">
               <span class="member-name">{{ member.name }}</span>
               <p class="member-date">Adicionado em: {{ formatDate(member.addedAt) }}</p>
+              <p class="member-attendance">Total de presenças: {{ member.totalAttendance }}</p>
             </div>
           </div>
         </div>
@@ -107,6 +108,10 @@ export default {
 
 .member-date {
   font-size: 1em; /* Aumentando o tamanho da data */
+}
+
+.member-attendance {
+  font-size: 1em; /* Tamanho da participação máxima */
 }
 
 p {

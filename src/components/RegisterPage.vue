@@ -70,6 +70,8 @@ export default {
       axios.post('/auth/register', userData)
         .then(response => {
           console.log(response.data);
+          
+          this.$router.push('/auth/login');
         })
         .catch(error => {
           if (error.response) {
