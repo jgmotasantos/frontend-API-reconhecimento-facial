@@ -12,8 +12,8 @@
             <div class="member-details">
               <span class="member-name">{{ member.name }}</span>
               <p class="member-date">Adicionado em: {{ formatDate(member.addedAt) }}</p>
-              <p class="member-attendance">Total de presenças: {{ member.totalAttendance }}</p>
             </div>
+            <p class="member-attendance">Total de presenças: <span class="attendance-value">{{ member.totalAttendance }}</span></p>
           </div>
         </div>
       </div>
@@ -83,6 +83,7 @@ export default {
 .member {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Distribui os itens igualmente */
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid white;
@@ -99,6 +100,7 @@ export default {
 .member-details {
   display: flex;
   flex-direction: column;
+  flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
 }
 
 .member-name {
@@ -112,6 +114,15 @@ export default {
 
 .member-attendance {
   font-size: 1em; /* Tamanho da participação máxima */
+  margin-left: 15px; /* Espaçamento à esquerda para separar do conteúdo */
+  display: flex;
+  align-items: center; /* Alinhamento vertical central */
+}
+
+.attendance-value {
+  display: inline-block;
+  width: 3ch; /* Largura suficiente para 3 caracteres */
+  text-align: right; /* Alinhamento à direita */
 }
 
 p {
