@@ -5,7 +5,6 @@
       <ul class="links">
         <li><router-link :to="accessSessionsLink">Voltar para Minhas Sessões</router-link></li>
       </ul>
-      <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
       <div class="toggle-btn" @click="toggleMenu">
         <i class="fas fa-bars"></i>

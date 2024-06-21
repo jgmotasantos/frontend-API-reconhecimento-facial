@@ -3,7 +3,7 @@
     <FaceValidationNavbar :groupName="groupName"></FaceValidationNavbar>
     <div class="face-validation-wrapper">
       <div class="container">
-        <h1>Validar Face - {{ groupName }}</h1>
+        <h1>Validar Face - {{ sessionName }}</h1>
         <h2>Enviar uma foto para validação</h2>
         <div class="video-container">
           <video ref="video" class="video-box" width="320" height="240" autoplay></video>

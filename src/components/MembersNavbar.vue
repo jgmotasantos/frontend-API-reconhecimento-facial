@@ -7,7 +7,6 @@
         <li><router-link :to="createMemberLink">Criar Membro</router-link></li>
         <li><router-link :to="accessSessionsLink">Acessar Sessões do Grupo</router-link></li>
       </ul>
-      <router-link to="/auth/login" class="action-btn">Meu Perfil</router-link>
       <logout-button class="logout-button"></logout-button>
       <div class="toggle-btn" @click="toggleMenu">
         <i class="fas fa-bars"></i>

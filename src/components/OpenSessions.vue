@@ -11,7 +11,6 @@
           <div v-for="session in sessions" :key="session.id" class="session-item">
             <div class="session-info">
               <h2>{{ session.name }}</h2>
-              <p>Iniciada em: {{ formatDate(session.startedAt) }}</p>
             </div>
             <button class="view-more-btn" @click="validateFaces(session.name)">Validar Faces</button>
           </div>

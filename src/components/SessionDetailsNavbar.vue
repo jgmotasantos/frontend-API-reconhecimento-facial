@@ -5,7 +5,6 @@
         <ul class="links">
           <li><router-link :to="backToSessions">Voltar para Minhas Sessões</router-link></li>
         </ul>
-        <router-link to='/auth/login' class="action-btn">Meu Perfil</router-link>
         <logout-button class="logout-button"></logout-button>
         <div class="toggle-btn" @click="toggleMenu">
           <i class="fas fa-bars"></i>
@@ -18,7 +17,6 @@
             <li><router-link to="/contact">Contato</router-link></li>
             <li><router-link to="/grupos">Grupos</router-link></li>
             <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
-            <li><router-link to="/auth/login" class="action-btn">Meu Perfil</router-link></li>
           </ul>
         </div>
       </div>

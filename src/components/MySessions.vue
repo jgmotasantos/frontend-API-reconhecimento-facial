@@ -3,7 +3,7 @@
     <mys-navbar :groupName="groupName"></mys-navbar>
     <div class="my-sessions-wrapper">
       <div class="container">
-        <h1>Minhas Sessões Encerradas</h1>
+        <h1>Sessões Encerradas</h1>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão encerrada.</div>
@@ -11,7 +11,6 @@
           <div v-for="session in sessions" :key="session.id" class="session-item">
             <div class="session-info">
               <h2>{{ session.name }}</h2>
-              <p>Encerrada em: {{ formatDate(session.endedAt) }}</p>
             </div>
             <button class="view-more-btn" @click="viewDetails(session.name)">Ver Mais</button>
           </div>
