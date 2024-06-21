@@ -10,6 +10,7 @@ import MySessions from './components/MySessions.vue';
 import CreateSessions from './components/CreateSessions.vue';
 import OpenSessions from './components/OpenSessions.vue';
 import SessionDetails from './components/SessionDetails.vue'; // Importando a nova página
+import FaceValidation from './components/FaceValidation.vue'; // Importando a página FaceValidation
 
 const routes = [
   { path: '/auth/login', component: LoginForm },
@@ -22,7 +23,8 @@ const routes = [
   { path: '/grupos/:nomeDoGrupo/sessoes/encerradas', name: 'MySessions', component: MySessions },
   { path: '/grupos/:nomeDoGrupo/sessoes/iniciar', name: 'CreateSessions', component: CreateSessions },
   { path: '/grupos/:nomeDoGrupo/sessoes/em-andamento', name: 'OpenSessions', component: OpenSessions },
-  { path: '/grupos/:nomeDoGrupo/sessoes/:nomeDaSessao/detalhes', name: 'SessionDetails', component: SessionDetails }, // Nova rota para detalhes da sessão
+  { path: '/grupos/:nomeDoGrupo/sessoes/:nomeDaSessao/detalhes', name: 'SessionDetails', component: SessionDetails },
+  { path: '/grupos/:nomeDoGrupo/sessoes/:nomeDaSessao/validar-face', name: 'FaceValidation', component: FaceValidation }, // Adicionando a rota para FaceValidation
   { path: '/sessoes/iniciar', redirect: '/grupos/:nomeDoGrupo/sessoes/iniciar' } // Redireciona para a rota com nomeDoGrupo
 ];
 
