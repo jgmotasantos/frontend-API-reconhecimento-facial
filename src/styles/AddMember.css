@@ -1,0 +1,288 @@
+@import '../styles/FaceValidation.css';
+
+/* Estilos existentes em AddMember.css */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container {
+    width: 700px;
+    height: 575px;
+    min-height: 400px;
+    padding: 30px;
+    background-color: #1c1c1c;
+    border: 2px solid rgb(0, 98, 255);
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+}
+
+.container-with-filter {
+  width: 665px;
+  height: 700px; /* Altura automática */
+  padding: 30px;
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  backdrop-filter: blur(15px);
+}
+
+h1 {
+  color: #eee;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.description {
+  color: #eee;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.group-input,
+.filter-input {
+  flex: 1;
+  outline: none;
+  padding: 10px 10px 10px 20px;
+  background-color: transparent;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 30px;
+  color: #eee;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.group-input::placeholder,
+.filter-input::placeholder {
+  color: #ffffff;
+}
+
+.add-button {
+  border: none;
+  outline: none;
+  background: rgb(0, 98, 255);
+  color: #fff;
+  font-size: 35px;
+  cursor: pointer;
+  border-radius: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.empty-image {
+  margin: 55px auto 0;
+  display: block;
+}
+
+.group {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1c1c1c;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 2px solid rgb(0, 98, 255);
+  transition: all 0.2s ease;
+}
+
+.group:first-child {
+  margin-top: 0;
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+
+.group:hover {
+  background-color: #19e4ffbe;
+}
+
+.group span {
+  color: #eee;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Removendo o CSS relacionado ao checkbox */
+span::before {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  margin-left: 0;
+  border-radius: 0;
+  border: none;
+}
+
+/* Removendo o CSS relacionado ao input checkbox */
+input[type='checkbox'] {
+  display: none;
+}
+
+.group-actions {
+  display: flex;
+  align-items: center;
+}
+
+.view-more-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.view-more-btn:hover {
+  background-color: #0056b3;
+}
+
+.groups-container {
+  height: auto; /* Altura automática */
+  max-height: 450px; /* Altura máxima para scroll */
+  overflow: overlay;
+}
+
+.groups-container::-webkit-scrollbar-track {
+  background: rgb(247, 247, 247);
+  border-radius: 20px;
+}
+
+.groups-container::-webkit-scrollbar {
+  width: 0;
+}
+
+.groups-container:hover::-webkit-scrollbar {
+  width: 7px;
+}
+
+.groups-container::-webkit-scrollbar-thumb {
+  background: #d5d5d5;
+  border-radius: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.edit-selected {
+  color: #eee;
+  padding: 7px 15px;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-selected:hover {
+  background-color: #00ff88a1;
+}
+
+.page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: bisque;
+  height: 100vh; /* Ajustando a altura para preencher a tela */
+}
+
+.my-groups-wrapper {
+  background: url(../assets/groupsbg.jpg); 
+  background-size: cover;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+}
+
+/* Estilos adicionados para a janela modal */
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 60%;
+  max-width: 800px;
+}
+
+.modal-content h3 {
+  color: #fff; /* Cor branca para o texto */
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.validate-button, .retake-button, .save-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.validate-button:hover, .retake-button:hover, .save-button:hover {
+  background-color: #0056b3;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.captured-photo {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+img {
+  display: block;
+  margin: 10px auto;
+  width: 320px;
+  height: 240px;
+}
