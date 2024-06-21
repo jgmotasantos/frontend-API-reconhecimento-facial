@@ -9,16 +9,8 @@
             class="group-input" 
             placeholder="Adicionar novo membro..." 
             v-model="name" 
-            @keyup.enter="handleSubmit" 
             :disabled="loading"
           >
-          <button 
-            class="add-button" 
-            @click="handleSubmit" 
-            :disabled="loading"
-          >
-            <i class="fa fa-plus-circle"></i>
-          </button>
         </div>
         <div v-if="loading" class="loading-message">
           Adicionando membro...
@@ -29,15 +21,25 @@
         <div v-if="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
-        <div>
+        <div class="video-container">
           <video ref="video" class="video-box" width="320" height="240" autoplay></video>
+        </div>
+        <div class="button-container">
           <button type="button" class="photo-button" @click="capturePhoto">Tirar Foto</button>
         </div>
-        <canvas ref="canvas" width="320" height="240" style="display: none;"></canvas>
-        <div v-if="photoData">
-          <img :src="'data:image/jpeg;base64,' + photoData" alt="Captura da webcam" />
-          <button class="save-button" @click="handleSubmit">Salvar Foto</button>
+
+        <div v-if="showModal" class="modal">
+          <div class="modal-content">
+            <span class="close" @click="closeModal">&times;</span>
+            <img :src="'data:image/jpeg;base64,' + photoData" alt="Captura da webcam" class="captured-photo"/>
+            <div class="modal-buttons">
+              <button class="save-button" @click="handleSubmit">Salvar Foto</button>
+              <button class="retake-button" @click="retakePhoto">Tirar Foto Novamente</button>
+            </div>
+          </div>
         </div>
+
+        <canvas ref="canvas" width="320" height="240" style="display: none;"></canvas>
       </div>
     </div>
   </div>
@@ -59,6 +61,7 @@ export default {
       successMessage: '',
       errorMessage: '',
       photoData: null,
+      showModal: false,
     };
   },
   mounted() {
@@ -82,7 +85,15 @@ export default {
       const imageDataURL = canvas.toDataURL('image/jpeg');
       
       // Armazenar a foto como base64
-      this.photoData = imageDataURL.replace(/^data:image\/(jpeg);base64,/, '');
+      this.photoData = imageDataURL.replace(/^data:image\/jpeg;base64,/, '');
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+    },
+    retakePhoto() {
+      this.photoData = null;
+      this.showModal = false;
     },
     async handleSubmit() {
       const nomeDoGrupo = this.$route.params.nomeDoGrupo;
@@ -123,6 +134,7 @@ export default {
         this.name = '';
         this.photoData = null;
         console.log('Sucesso:', response.data);
+        this.showModal = false;
       } catch (error) {
         this.errorMessage = 'Erro ao adicionar membro.';
         console.error('Erro:', error.response ? error.response.data : error.message);
@@ -135,30 +147,116 @@ export default {
 </script>
 
 <style scoped>
-@import '../styles/MyGroups.css';
+@import '../styles/AddMember.css';
 
 .video-box {
   display: block;
   margin: 10px auto;
 }
 
-.photo-button, .save-button {
-  display: block;
-  margin: 10px auto;
+.photo-button, .save-button, .retake-button {
+  display: inline-block;
+  margin: 10px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px; /* Tamanho fixo para ambos os botões */
+  text-align: center; /* Alinhamento do texto ao centro */
+}
+
+.photo-button:hover, .save-button:hover, .retake-button:hover {
+  background-color: #0056b3;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.loading-message, .success-message, .error-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #ffcc00;
+}
+
+.error-message {
+  color: #ff4d4d;
+}
+
+.success-message {
+  color: #4CAF50;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 60%;
+  max-width: 800px;
+}
+
+.modal-content h3 {
+  color: #fff; /* Cor branca para o texto */
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.validate-button, .retake-button, .save-button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.photo-button:hover, .save-button:hover {
-  background-color: #45a049;
+.validate-button:hover, .retake-button:hover, .save-button:hover {
+  background-color: #0056b3;
 }
 
-button {
-  margin: 5px;
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.captured-photo {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 img {
