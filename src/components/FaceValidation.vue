@@ -108,7 +108,7 @@ export default {
       this.errorMessage = '';
 
       try {
-        await axios.put(
+        const response = await axios.patch(
           `http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionName}/validar-face`,
           payload,
           {
@@ -118,6 +118,7 @@ export default {
             withCredentials: true 
           }
         );
+        console.log(response.data);  // Log de sucesso
         this.successMessage = 'Foto validada com sucesso!';
         this.photoData = null;
         this.showModal = false;
@@ -136,9 +137,10 @@ export default {
     },
     async endSession() {
       try {
-        await axios.post(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionName}/encerrar`, {}, {
+        const response = await axios.post(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionName}/encerrar`, {}, {
           withCredentials: true
         });
+        console.log(response.data);  // Log de sucesso
         this.successMessage = 'Sessão encerrada com sucesso!';
         this.showEndSessionModal = false;
       } catch (error) {
