@@ -81,7 +81,7 @@ export default {
 }
 
 .container {
-  width: 1000px;
+  width: 900px;
   height: 700px;
   min-height: 400px;
   padding: 30px;
@@ -154,7 +154,7 @@ h1 {
 .session-info {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 600px;
 }
 
 .session-item h2 {
