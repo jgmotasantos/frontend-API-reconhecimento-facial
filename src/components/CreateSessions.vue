@@ -3,7 +3,7 @@
     <CreastsNavbar :groupName="groupName"></CreastsNavbar>
     <div class="create-sessions-wrapper">
       <div class="container">
-        <h1>Criar Sessão</h1>
+        <h1>Iniciar Sessão</h1>
         <div class="input-container">
           <input
             class="session-input"

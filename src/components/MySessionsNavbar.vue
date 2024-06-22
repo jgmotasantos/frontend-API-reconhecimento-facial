@@ -6,7 +6,7 @@
         <li><router-link :to="backToDetails">Voltar aos detalhes do Grupo</router-link></li>
         <li><router-link :to="openSessionsLink">Sessões em Andamento</router-link></li>
         <li><router-link :to="accessSessionsLink">Sessões Encerradas</router-link></li>
-        <li><router-link :to="createSessionLink">Criar Sessão</router-link></li>
+        <li><router-link :to="createSessionLink">Iniciar Sessão</router-link></li>
       </ul>
       <logout-button class="logout-button"></logout-button>
       <div class="toggle-btn" @click="toggleMenu">

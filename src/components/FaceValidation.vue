@@ -153,6 +153,9 @@ export default {
         console.log(response.data);  // Log de sucesso
         this.successMessage = 'Sessão encerrada com sucesso!';
         this.showEndSessionModal = false;
+        
+        // Redirecionar para a página de sessões encerradas
+        this.$router.push(`/grupos/${this.groupName}/sessoes/encerradas`);
       } catch (error) {
         this.errorMessage = 'Erro ao encerrar a sessão.';
         console.error('Erro ao encerrar a sessão:', error.response ? error.response.data : error.message);
@@ -161,6 +164,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 @import '../styles/FaceValidation.css';
