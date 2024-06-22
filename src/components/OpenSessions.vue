@@ -14,7 +14,7 @@
               <h2>{{ session.name }}</h2>
             </div>
             <div class="session-actions">
-              <button class="delete-btn" @click="confirmDelete(session.name)">Excluir</button>
+              <button class="delete-btn" @click="confirmDelete(session.name)">Deletar</button>
               <button class="view-more-btn" @click="validateFaces(session.name)">Validar Faces</button>
             </div>
           </div>
