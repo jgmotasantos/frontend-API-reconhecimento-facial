@@ -93,7 +93,7 @@ export default {
       const imageDataURL = canvas.toDataURL('image/jpeg');
       
       // Armazenar a foto como base64
-      this.photoData = imageDataURL.replace(/^data:image\/(jpeg);base64,/, '');
+      this.photoData = imageDataURL.replace(/^data:image\/jpeg;base64,/, '');
       this.showModal = true;
     },
     closeModal() {
@@ -132,7 +132,6 @@ export default {
         this.successMessage = 'Foto validada com sucesso!';
         this.photoData = null;
         this.showModal = false;
-        this.stopWebcam(); // Parar a webcam após validar a foto
       } catch (error) {
         this.errorMessage = 'Erro ao validar foto.';
         console.error('Erro:', error.response ? error.response.data : error.message);
@@ -154,7 +153,6 @@ export default {
         console.log(response.data);  // Log de sucesso
         this.successMessage = 'Sessão encerrada com sucesso!';
         this.showEndSessionModal = false;
-        this.stopWebcam(); // Parar a webcam ao encerrar a sessão
       } catch (error) {
         this.errorMessage = 'Erro ao encerrar a sessão.';
         console.error('Erro ao encerrar a sessão:', error.response ? error.response.data : error.message);

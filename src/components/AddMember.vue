@@ -145,7 +145,6 @@ export default {
         this.photoData = null;
         console.log('Sucesso:', response.data);
         this.showModal = false;
-        this.stopWebcam(); // Parar a webcam após salvar a foto
       } catch (error) {
         this.errorMessage = 'Erro ao adicionar membro.';
         console.error('Erro:', error.response ? error.response.data : error.message);
