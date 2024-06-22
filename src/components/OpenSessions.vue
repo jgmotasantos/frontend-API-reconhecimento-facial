@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <os-navbar :groupName="groupName"></os-navbar>
@@ -12,8 +13,22 @@
             <div class="session-info">
               <h2>{{ session.name }}</h2>
             </div>
-            <button class="view-more-btn" @click="validateFaces(session.name)">Validar Faces</button>
+            <div class="session-actions">
+              <button class="delete-btn" @click="confirmDelete(session.name)">Excluir</button>
+              <button class="view-more-btn" @click="validateFaces(session.name)">Validar Faces</button>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="showModal" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <h3>Deseja realmente deletar a sessão "{{ sessionToDelete }}"?</h3>
+        <div class="modal-buttons">
+          <button class="confirm-btn" @click="deleteSession">Sim</button>
+          <button class="cancel-btn" @click="closeModal">Não</button>
         </div>
       </div>
     </div>
@@ -34,7 +49,9 @@ export default {
       sessions: [],
       loading: false,
       errorMessage: '',
-      groupName: this.$route.params.nomeDoGrupo // Obtém o nome do grupo da rota
+      groupName: this.$route.params.nomeDoGrupo, // Obtém o nome do grupo da rota
+      showModal: false,
+      sessionToDelete: ''
     };
   },
   mounted() {
@@ -63,6 +80,25 @@ export default {
     },
     validateFaces(sessionName) {
       this.$router.push({ path: `/grupos/${this.groupName}/sessoes/${sessionName}/validar-face` });
+    },
+    confirmDelete(sessionName) {
+      this.sessionToDelete = sessionName;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+      this.sessionToDelete = '';
+    },
+    deleteSession() {
+      axios.delete(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionToDelete}/deletar`)
+        .then(() => {
+          this.fetchSessions(); // Recarregar a lista de sessões
+          this.closeModal(); // Fechar o modal
+        })
+        .catch(error => {
+          this.errorMessage = 'Erro ao deletar a sessão.';
+          console.error('Erro ao deletar a sessão:', error.response ? error.response.data : error.message);
+        });
     }
   }
 };
@@ -168,7 +204,12 @@ h1 {
   margin: 0;
 }
 
-.view-more-btn {
+.session-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.view-more-btn, .delete-btn {
   background-color: #007bff;
   color: white;
   border: none;
@@ -177,7 +218,85 @@ h1 {
   border-radius: 3px;
 }
 
+.delete-btn {
+  background-color: #ff4d4d;
+}
+
 .view-more-btn:hover {
   background-color: #0056b3;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}
+
+/* Estilos para o modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 60%;
+  max-width: 800px;
+}
+
+.modal-content h3 {
+  color: #fff;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-btn, .cancel-btn { 
+  padding: 10px 25px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.confirm-btn:hover, .cancel-btn:hover {
+  background-color: #000;
+}
+
+.confirm-btn {
+  background-color: #ff4d4d;
+}
+
+.cancel-btn {
+  background-color: #007bff;
 }
 </style>
