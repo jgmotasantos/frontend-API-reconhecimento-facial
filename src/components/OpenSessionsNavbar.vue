@@ -14,12 +14,10 @@
         </div>
         <div class="dropdown-menu" :class="{ open: menuOpen }">
           <ul>
-            <li><router-link to="/">Presença</router-link></li>
-            <li><router-link to="/about">Sobre Nós</router-link></li>
-            <li><router-link to="/services">Serviços</router-link></li>
-            <li><router-link to="/contact">Contato</router-link></li>
-            <li><router-link to="/grupos">Grupos</router-link></li>
-            <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
+            <li><router-link :to="backToDetails">Voltar aos detalhes do Grupo</router-link></li>
+            <li><router-link :to="openSessionsLink">Sessões em Andamento</router-link></li>
+            <li><router-link :to="accessSessionsLink">Sessões Encerradas</router-link></li>
+            <li><router-link :to="createSessionLink">Criar Sessão</router-link></li>
           </ul>
         </div>
       </div>

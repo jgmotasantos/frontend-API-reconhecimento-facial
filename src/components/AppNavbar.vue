@@ -13,11 +13,8 @@
       </div>
       <div class="dropdown-menu" :class="{ open: menuOpen }">
         <ul>
-          <li><router-link to="/">Presença</router-link></li>
-          <li><router-link to="/about">Sobre Nós</router-link></li>
-          <li><router-link to="/services">Serviços</router-link></li>
-          <li><router-link to="/contact">Contato</router-link></li>
-          <li><router-link to="/grupos">Grupos</router-link></li>
+          <li><router-link to="/services">Sobre Nós</router-link></li>
+          <li><router-link to="/grupos">Meus Grupos</router-link></li>
           <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
           <li><router-link to="/auth/login" class="action-btn">Meu Perfil</router-link></li>
         </ul>
