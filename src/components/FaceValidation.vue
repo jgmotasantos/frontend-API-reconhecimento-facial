@@ -60,21 +60,31 @@ export default {
       showEndSessionModal: false,
       groupName: this.$route.params.nomeDoGrupo,
       sessionName: this.$route.params.nomeDaSessao,
+      stream: null,
     };
   },
   mounted() {
     this.setupWebcam();
+  },
+  beforeUnmount() {
+    this.stopWebcam();
   },
   methods: {
     setupWebcam() {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
+          this.stream = stream;
           this.$refs.video.srcObject = stream;
         })
         .catch((err) => {
           console.error("Erro ao acessar a webcam: ", err);
         });
+    },
+    stopWebcam() {
+      if (this.stream) {
+        this.stream.getTracks().forEach(track => track.stop());
+      }
     },
     capturePhoto() {
       const canvas = this.$refs.canvas;
@@ -122,6 +132,7 @@ export default {
         this.successMessage = 'Foto validada com sucesso!';
         this.photoData = null;
         this.showModal = false;
+        this.stopWebcam(); // Parar a webcam após validar a foto
       } catch (error) {
         this.errorMessage = 'Erro ao validar foto.';
         console.error('Erro:', error.response ? error.response.data : error.message);
@@ -143,6 +154,7 @@ export default {
         console.log(response.data);  // Log de sucesso
         this.successMessage = 'Sessão encerrada com sucesso!';
         this.showEndSessionModal = false;
+        this.stopWebcam(); // Parar a webcam ao encerrar a sessão
       } catch (error) {
         this.errorMessage = 'Erro ao encerrar a sessão.';
         console.error('Erro ao encerrar a sessão:', error.response ? error.response.data : error.message);

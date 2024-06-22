@@ -62,21 +62,31 @@ export default {
       errorMessage: '',
       photoData: null,
       showModal: false,
+      stream: null,
     };
   },
   mounted() {
     this.setupWebcam();
+  },
+  beforeUnmount() {
+    this.stopWebcam();
   },
   methods: {
     setupWebcam() {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
+          this.stream = stream;
           this.$refs.video.srcObject = stream;
         })
         .catch((err) => {
           console.error("Erro ao acessar a webcam: ", err);
         });
+    },
+    stopWebcam() {
+      if (this.stream) {
+        this.stream.getTracks().forEach(track => track.stop());
+      }
     },
     capturePhoto() {
       const canvas = this.$refs.canvas;
@@ -135,6 +145,7 @@ export default {
         this.photoData = null;
         console.log('Sucesso:', response.data);
         this.showModal = false;
+        this.stopWebcam(); // Parar a webcam após salvar a foto
       } catch (error) {
         this.errorMessage = 'Erro ao adicionar membro.';
         console.error('Erro:', error.response ? error.response.data : error.message);
