@@ -73,6 +73,7 @@ export default {
           console.log(response.data);
         })
         .catch(error => {
+          this.errorMessage = 'Erro ao adicionar grupo. Tente novamente.';
           console.log(error.response.data);
         })
         .finally(() => {
@@ -90,8 +91,10 @@ export default {
         })
         .catch(error => {
           if (error.response) {
+            this.errorMessage = 'Erro de autenticação. Tente novamente.';
             console.log('Erro de autenticação:', error.response.data);
           } else {
+            this.errorMessage = 'Erro ao obter dados. Tente novamente.';
             console.log('Erro:', error.message);
           }
         })
@@ -110,5 +113,17 @@ export default {
   color: #eee;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
 }
 </style>

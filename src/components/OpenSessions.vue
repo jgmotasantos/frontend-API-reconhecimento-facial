@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <os-navbar :groupName="groupName"></os-navbar>
@@ -7,8 +6,8 @@
         <h1>Sessões em Andamento</h1>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-        <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão em andamento.</div>
-        <div v-if="sessions.length > 0" class="sessions-list">
+        <div v-if="sessions.length === 0 && !loading && !errorMessage" class="empty-message">Nenhuma sessão em andamento.</div>
+        <div v-if="sessions.length > 0 && !loading && !errorMessage" class="sessions-list">
           <div v-for="session in sessions" :key="session.id" class="session-item">
             <div class="session-info">
               <h2>{{ session.name }}</h2>
@@ -27,7 +26,7 @@
         <span class="close" @click="closeModal">&times;</span>
         <h3>Deseja realmente deletar a sessão "{{ sessionToDelete }}"?</h3>
         <div class="modal-buttons">
-          <button class="confirm-btn" @click="deleteSession">Sim</button>
+          <button class="confirm-btn" @click="deleteSessionConfirmed">Sim</button>
           <button class="cancel-btn" @click="closeModal">Não</button>
         </div>
       </div>
@@ -61,7 +60,7 @@ export default {
     fetchSessions() {
       this.loading = true;
       this.errorMessage = '';
-      axios.get(`http://localhost:8080/grupos/${this.groupName}/sessoes/em-andamento`)
+      axios.get(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/em-andamento`)
         .then(response => {
           this.sessions = response.data.sessions;
           console.log('Sessões em andamento:', response.data); // Adicionando o log aqui
@@ -79,7 +78,7 @@ export default {
       return new Date(dateString).toLocaleDateString('pt-BR', options);
     },
     validateFaces(sessionName) {
-      this.$router.push({ path: `/grupos/${this.groupName}/sessoes/${sessionName}/validar-face` });
+      this.$router.push({ path: `/grupos/${encodeURIComponent(this.groupName)}/sessoes/${encodeURIComponent(sessionName)}/validar-face` });
     },
     confirmDelete(sessionName) {
       this.sessionToDelete = sessionName;
@@ -89,9 +88,11 @@ export default {
       this.showModal = false;
       this.sessionToDelete = '';
     },
-    deleteSession() {
-      axios.delete(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionToDelete}/deletar`)
-        .then(() => {
+    deleteSessionConfirmed() {
+      const encodedSessionName = encodeURIComponent(this.sessionToDelete);
+      axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/${encodedSessionName}/deletar`)
+        .then(response => {
+          console.log('Sessão deletada com sucesso:', response.data);
           this.fetchSessions(); // Recarregar a lista de sessões
           this.closeModal(); // Fechar o modal
         })

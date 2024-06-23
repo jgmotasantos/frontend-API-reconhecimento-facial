@@ -99,9 +99,11 @@ export default {
       const nomeDoGrupo = this.$route.params.nomeDoGrupo;
       try {
         if (this.memberToDelete) {
-          await axios.delete(`/grupos/${nomeDoGrupo}/detalhes/${this.memberToDelete}/deletar`);
+          const response = await axios.delete(`/grupos/${nomeDoGrupo}/detalhes/${this.memberToDelete}/deletar`);
+          console.log('Membro deletado com sucesso:', response.data);
         } else {
-          await axios.delete(`/grupos/${nomeDoGrupo}/detalhes/deletar-membros`);
+          const response = await axios.delete(`/grupos/${nomeDoGrupo}/detalhes/deletar-membros`);
+          console.log('Todos os membros deletados com sucesso:', response.data);
         }
         this.fetchGroupDetails(); // Recarregar a lista de membros
         this.closeModal(); // Fechar o modal
