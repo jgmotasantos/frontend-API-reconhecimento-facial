@@ -109,10 +109,10 @@ export default {
             this.groupsJson = [];
           }
           localStorage.setItem('groups', JSON.stringify(this.groupsJson));
-          console.log(response.data);
+          console.log('Grupos buscados:', response.data);
         })
         .catch(error => {
-          console.error('Erro ao buscar grupos:', error.response.data);
+          console.error('Erro ao buscar grupos:', error.response ? error.response.data : error.message);
           this.groupsJson = [];
         });
     },
@@ -131,12 +131,13 @@ export default {
     },
     deleteGroup() {
       axios.delete(`/grupos/${this.groupToDelete}/deletar`)
-        .then(() => {
+        .then(response => {
+          console.log('Grupo deletado:', response.data);
           this.fetchGroups();
           this.closeModal();
         })
         .catch(error => {
-          console.error('Erro ao deletar o grupo:', error.response.data);
+          console.error('Erro ao deletar o grupo:', error.response ? error.response.data : error.message);
         });
     },
     confirmDeleteAll() {
@@ -147,12 +148,13 @@ export default {
     },
     deleteAllGroups() {
       axios.delete(`/grupos/deletar`)
-        .then(() => {
+        .then(response => {
+          console.log('Todos os grupos deletados:', response.data);
           this.fetchGroups();
           this.closeModalDeleteAll();
         })
         .catch(error => {
-          console.error('Erro ao deletar todos os grupos:', error.response.data);
+          console.error('Erro ao deletar todos os grupos:', error.response ? error.response.data : error.message);
         });
     }
   }

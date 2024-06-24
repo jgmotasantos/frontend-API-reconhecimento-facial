@@ -4,6 +4,10 @@
     <div class="my-groups-wrapper">
       <div class="container">
         <h1>Criar Membro</h1>
+        <p>
+          Esses serão os dados bases do Membro, que serão utilizados para monitorar ele por meio das Sessões. <br>
+          Não é permitido adicionar membros com mesmo nome, ou mesma face.
+        </p>  
         <div class="input-container">
           <input 
             class="group-input" 
@@ -158,6 +162,15 @@ export default {
 
 <style scoped>
 @import '../styles/AddMember.css';
+
+.description-container {
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
 
 .video-box {
   display: block;
