@@ -9,7 +9,7 @@
 
 .container {
   width: 1000px;
-  height: 700px;
+  height: 775px;
   min-height: 400px;
   padding: 30px;
   background-color: #1c1c1c;
@@ -18,7 +18,7 @@
   backdrop-filter: blur(15px);
 }
 
-h1,h4 {
+h1,h2,h4 {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -8,8 +8,9 @@
         </div>
         <h1>{{ group.name }}</h1>
         <p class="group-created">Grupo criado em: {{ formatDate(group.createdAt) }}</p>
-        <p class="group-max-total-attendance">Máximo de Presença Total possível: {{ group.maxTotalAttendance }}</p>
+        <p class="group-max-total-attendance">Máximo de total de presenças possível: {{ group.maxTotalAttendance }}</p>
         <button class="delete-all-btn" @click="confirmDeleteAllMembers">Deletar Todos os Membros</button>
+        <h2>Membros:</h2>
         <div class="members-list">
           <div v-for="(member, index) in group.members" :key="index" class="member">
             <img :src="getMemberPhoto(member.face)" :alt="member.name" class="member-photo">
