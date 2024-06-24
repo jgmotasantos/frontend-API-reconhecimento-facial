@@ -11,6 +11,7 @@
           <p class="session-date">Encerrada em: {{ formatDate(session.endedAt) }}</p>    
           <p class="session-max-attendance">Máximo de Presença possível: {{ session.maxAttendance }}</p>
           <h2 class="members-title">Membros:</h2>
+          <div class="member-list">
           <ul class="members-list">
             <li v-for="member in session.members" :key="member.id" class="member-item">
               <div class="member-face-wrapper">
@@ -29,6 +30,7 @@
               </div>
             </li>
           </ul>
+        </div>
         </div>
       </div>
     </div>
