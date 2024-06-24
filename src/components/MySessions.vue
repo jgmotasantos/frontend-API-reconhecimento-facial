@@ -25,6 +25,7 @@
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
         <h3>Deseja realmente deletar a sessão "{{ sessionToDelete }}"?</h3>
+        <div v-if="deleteErrorMessage" class="error-message">{{ deleteErrorMessage }}</div>
         <div class="modal-buttons">
           <button class="confirm-btn" @click="deleteSession">Sim</button>
           <button class="cancel-btn" @click="closeModal">Não</button>
@@ -48,6 +49,7 @@ export default {
       sessions: [],
       loading: false,
       errorMessage: '',
+      deleteErrorMessage: '',
       groupName: this.$route.params.nomeDoGrupo,
       showModal: false,
       sessionToDelete: ''
@@ -82,6 +84,7 @@ export default {
     },
     confirmDelete(sessionName) {
       this.sessionToDelete = sessionName;
+      this.deleteErrorMessage = '';
       this.showModal = true;
     },
     closeModal() {
@@ -90,12 +93,13 @@ export default {
     },
     deleteSession() {
       axios.delete(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionToDelete}/deletar`)
-        .then(() => {
+        .then(response => {
+          console.log('Deletar sessão resposta:', response.data);
           this.fetchSessions();
           this.closeModal();
         })
         .catch(error => {
-          this.errorMessage = 'Erro ao deletar a sessão.';
+          this.deleteErrorMessage = 'Erro ao deletar a sessão.';
           console.error('Erro ao deletar a sessão:', error.response ? error.response.data : error.message);
         });
     }
