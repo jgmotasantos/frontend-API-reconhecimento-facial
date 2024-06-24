@@ -5,7 +5,11 @@
       <div class="container">
         <h1>Criar Grupo</h1>
         <p class="description">
-          Preencha o nome do novo grupo no campo abaixo e clique no botão para adicionar. <br>
+          Grupos contém diversos Membros, que são as pessoas que você pretende monitorar a presença. <br>
+          <br>
+          Dentro de um Grupo, podem ser criadas várias Sessões, <br>
+          que, por sua vez, são intervalos de tempo em que as fotos são tiradas para verificar presenças. <br>
+          <br>
           Grupos não podem ter nomes repetidos.
         </p>
         <div class="input-container">

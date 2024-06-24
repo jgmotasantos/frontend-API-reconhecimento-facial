@@ -98,7 +98,7 @@ export default {
 
 .container {
   width: 1000px;
-  height: 700px;
+  height: 750px;
   min-height: 400px;
   padding: 30px;
   background-color: #1c1c1c;
