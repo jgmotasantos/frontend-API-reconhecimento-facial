@@ -5,12 +5,14 @@
       <div class="container">
         <h1>Iniciar Sessão</h1>
         <div class="input-container">
+          <label for="session-name">Nome desejado:</label>
           <input
             class="session-input"
             placeholder="Nome da Sessão"
             v-model="newSessionName"
             :disabled="loading"
           />
+          <label for="attendance-value">Presença máxima:</label>
           <input
             class="session-input"
             placeholder="Valor da presença"
@@ -116,7 +118,13 @@ h1 {
 .input-container {
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Adicionado para alinhar labels e inputs */
   margin-bottom: 25px;
+}
+
+.input-container label {
+  color: #ffffff;
+  margin-right: 10px; /* Adicionado para criar espaço entre label e input */
 }
 
 .session-input {
