@@ -19,9 +19,6 @@
             </div>
           </div>
         </div>
-        <div class="remember-forgot d-flex justify-content-between align-items-center">
-          <label class="form-check-label"><input type="checkbox" class="form-check-input" v-model="rememberMe"> Lembrar-se de mim</label>
-        </div>
         <button type="submit" class="btn btn-light btn-block mt-3">Entrar</button>
         <div class="register-link text-center mt-3">
           <p>Ainda não possui uma conta?</p>

@@ -8,6 +8,7 @@
         </div>
         <h1>{{ group.name }}</h1>
         <p class="group-created">Grupo criado em: {{ formatDate(group.createdAt) }}</p>
+        <p class="group-max-total-attendance">Máximo de Presença Total possível: {{ group.maxTotalAttendance }}</p>
         <button class="delete-all-btn" @click="confirmDeleteAllMembers">Deletar Todos os Membros</button>
         <div class="members-list">
           <div v-for="(member, index) in group.members" :key="index" class="member">
@@ -127,6 +128,11 @@ export default {
 .members-list {
   max-height: 400px; /* Definindo a altura máxima da lista */
   overflow-y: auto; /* Adicionando barra de rolagem vertical */
+}
+
+.group-max-total-attendance{
+  margin-bottom: 20px; /* Adicionando margem inferior ao texto */
+  color: white; /* Cor branca para o texto */
 }
 
 .member {

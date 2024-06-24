@@ -8,7 +8,8 @@
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="session" class="session-info">
           <p class="session-date">Iniciada em: {{ formatDate(session.startedAt) }}</p>
-          <p class="session-date">Encerrada em: {{ formatDate(session.endedAt) }}</p>
+          <p class="session-date">Encerrada em: {{ formatDate(session.endedAt) }}</p>    
+          <p class="session-max-attendance">Máximo de Presença possível: {{ session.maxAttendance }}</p>
           <h2 class="members-title">Membros:</h2>
           <ul class="members-list">
             <li v-for="member in session.members" :key="member.id" class="member-item">
