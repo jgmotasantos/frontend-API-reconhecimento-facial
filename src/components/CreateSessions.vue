@@ -4,6 +4,18 @@
     <div class="create-sessions-wrapper">
       <div class="container">
         <h1>Iniciar Sessão</h1>
+        <p class="description">
+          Quando uma sessão é iniciada, é liberado para o usuário capturar fotos da face das pessoas. <br>
+        Caso a face capturada corresponda a de algum Membro da Sessão, ele é validado e recebe o valor de presença máximo,<br>
+        definido no momento de criação da Sessão, que não pode ser excedido. <br>
+        <br>
+        Após encerrar a Sessão, é possível ver os dados que foram gerados nesse processo, e caso queira,<br>
+        alterar o valor de presença de um Membro da Sessão. <br>
+        <br>
+          Obs: Membros da Sessão são compostos pelos Membros do Grupo presentes no momento de início da Sessão,<br>
+          e isso não pode ser alterado. Caso algum Membro seja deletado ou adicionado no grupo após o início da Sessão,<br>
+          essas alterações não serão feitas em Sessões que já foram iniciadas.
+        </p>
         <div class="input-container">
           <label for="session-name">Nome desejado:</label>
           <input
@@ -100,7 +112,7 @@ export default {
 
 .container {
   width: 1000px;
-  height: 700px;
+  height: auto;
   min-height: 400px;
   padding: 30px;
   background-color: #1c1c1c;
@@ -176,5 +188,11 @@ h1 {
   min-height: 100vh;
   background: url("../assets/sessionsbg.png");
   background-size: cover;
+}
+
+.description {
+  color: #eee;
+  text-align: center;
+  margin-bottom: 20px;
 }
 </style>

@@ -4,7 +4,7 @@
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
         <li><router-link to="/grupos">Voltar pra seleção de grupos</router-link></li>
-        <li><router-link :to="createMemberLink">Criar Membro</router-link></li>
+        <li><router-link :to="createMemberLink">Adicionar Membro</router-link></li>
         <li><router-link :to="accessSessionsLink">Acessar Sessões do Grupo</router-link></li>
       </ul>
       <logout-button class="logout-button"></logout-button>

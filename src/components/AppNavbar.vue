@@ -3,7 +3,6 @@
     <div class="navbar">
       <div class="logo"><router-link to="/home">Facial API.com</router-link></div>
       <ul class="links">
-        <li><router-link to="/about">Sobre Nós</router-link></li>
         <li><router-link to="/grupos">Meus Grupos</router-link></li>
         <li><router-link to="/grupos/criar">Criar Grupo</router-link></li>
       </ul>

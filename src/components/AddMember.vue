@@ -3,7 +3,7 @@
     <AddmNavbar></AddmNavbar>
     <div class="my-groups-wrapper">
       <div class="container">
-        <h1>Criar Membro</h1>
+        <h1>Adicionar Membro</h1>
         <p>
           Esses serão os dados bases do Membro, que serão utilizados para monitorar ele por meio das Sessões. <br>
           Não é permitido adicionar membros com mesmo nome, ou mesma face.

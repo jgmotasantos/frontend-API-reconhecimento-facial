@@ -10,7 +10,8 @@
           Dentro de um Grupo, podem ser criadas várias Sessões, <br>
           que, por sua vez, são intervalos de tempo em que as fotos são tiradas para verificar presenças. <br>
           <br>
-          Grupos não podem ter nomes repetidos.
+          Dados gerados nas Sessões, são sintetizados nos Grupos, como o total de todas as presenças que o <br>
+          Membro recebeu, e o Máximo de Presenças possíveis que um membro pode receber.
         </p>
         <div class="input-container">
           <input 

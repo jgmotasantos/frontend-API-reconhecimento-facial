@@ -24,8 +24,7 @@
         <section id="hero">
           <h1>Facial API</h1>
           <p>
-            A forma de fazer presença feita para os professores que buscam diminuir a carga de trabalho <br/>
-            Crie sua conta e comece já!
+            Ferramenta simples e rápida para facilitar o processo de presença. Chega de chamadas manuais!
           </p>
         </section>
       </main>
