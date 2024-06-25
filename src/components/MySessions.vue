@@ -7,8 +7,8 @@
         <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas</button>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-        <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão encerrada.</div>
-        <div v-if="sessions.length > 0" class="sessions-list">
+        <div v-if="!errorMessage && sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão encerrada.</div>
+        <div v-if="!errorMessage && sessions.length > 0" class="sessions-list">
           <div v-for="session in sessions" :key="session.id" class="session-item">
             <div class="session-info">
               <h2>{{ session.name }}</h2>
