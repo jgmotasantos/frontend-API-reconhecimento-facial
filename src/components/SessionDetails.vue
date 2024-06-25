@@ -8,29 +8,42 @@
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="session" class="session-info">
           <p class="session-date">Iniciada em: {{ formatDate(session.startedAt) }}</p>
-          <p class="session-date">Encerrada em: {{ formatDate(session.endedAt) }}</p>    
+          <p class="session-date">Encerrada em: {{ formatDate(session.endedAt) }}</p>
           <p class="session-max-attendance">Máximo de Presença possível: {{ session.maxAttendance }}</p>
           <h2 class="members-title">Membros:</h2>
           <div class="member-list">
-          <ul class="members-list">
-            <li v-for="member in session.members" :key="member.id" class="member-item">
-              <div class="member-face-wrapper">
-                <img v-if="member.wasFaceValidated" :src="getFaceUrl(member.face)" alt="Face do Membro" class="member-face"/>
-                <div v-else class="member-face-placeholder"></div>
-              </div>
-              <div class="member-info">
-                <p>{{ member.name }}</p>
-                <p class="was-face-validated">
-                  Face foi validada? 
-                  <span :class="{'validated': member.wasFaceValidated, 'not-validated': !member.wasFaceValidated}">
-                    {{ member.wasFaceValidated ? 'Sim' : 'Não' }}
-                  </span>
-                </p>
-                <p class="attendance">Presença: <span class="attendance-value">{{ member.attendance }}</span></p>
-              </div>
-            </li>
-          </ul>
+            <ul class="members-list">
+              <li v-for="member in session.members" :key="member.id" class="member-item">
+                <div class="member-face-wrapper">
+                  <img v-if="member.wasFaceValidated" :src="getFaceUrl(member.face)" alt="Face do Membro" class="member-face"/>
+                  <div v-else class="member-face-placeholder"></div>
+                </div>
+                <div class="member-info">
+                  <p>{{ member.name }}</p>
+                  <p class="was-face-validated">
+                    Face foi validada?
+                    <span :class="{'validated': member.wasFaceValidated, 'not-validated': !member.wasFaceValidated}">
+                      {{ member.wasFaceValidated ? 'Sim' : 'Não' }}
+                    </span>
+                  </p>
+                  <p class="attendance">Presença: <span class="attendance-value">{{ member.attendance }}</span></p>
+                  <button class="edit-btn" @click="confirmEditAttendance(member.name, member.attendance)">Editar Presença</button>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div v-if="showModal" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <h3>Qual o novo valor da presença de {{ memberToEdit }}?</h3>
+        <input v-model="newAttendance" type="number" min="0" :max="session.maxAttendance" class="attendance-input"/>
+        <div class="modal-buttons">
+          <button class="confirm-btn" @click="updateAttendance">Salvar</button>
+          <button class="cancel-btn" @click="closeModal">Cancelar</button>
         </div>
       </div>
     </div>
@@ -53,6 +66,9 @@ export default {
       errorMessage: '',
       groupName: this.$route.params.nomeDoGrupo,
       sessionName: this.$route.params.nomeDaSessao,
+      showModal: false,
+      memberToEdit: '',
+      newAttendance: 0,
     };
   },
   mounted() {
@@ -81,6 +97,31 @@ export default {
     },
     getFaceUrl(face) {
       return `data:image/jpeg;base64,${face}`;
+    },
+    confirmEditAttendance(memberName, currentAttendance) {
+      this.memberToEdit = memberName;
+      this.newAttendance = currentAttendance;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+      this.memberToEdit = '';
+      this.newAttendance = 0;
+    },
+    updateAttendance() {
+      const data = {
+        attendance: this.newAttendance
+      };
+      axios.patch(`http://localhost:8080/grupos/${this.groupName}/sessoes/${this.sessionName}/detalhes/${this.memberToEdit}/editar-presenca`, data)
+        .then(response => {
+          console.log('Presença atualizada com sucesso:', response.data);
+          this.fetchSessionDetails(); // Recarregar os detalhes da sessão
+          this.closeModal(); // Fechar o modal
+        })
+        .catch(error => {
+          this.errorMessage = 'Erro ao atualizar a presença.';
+          console.error('Erro ao atualizar a presença:', error.response ? error.response.data : error.message);
+        });
     }
   }
 };
@@ -200,5 +241,99 @@ h1 {
 
 .not-validated {
   color: red;
+}
+
+.edit-btn {
+  background-color: #ffcc00;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+.edit-btn:hover {
+  background-color: #e6b800;
+}
+
+/* Estilos para o modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 60%;
+  max-width: 800px;
+}
+
+.modal-content h3 {
+  color: #fff;
+}
+
+.attendance-input {
+  width: 100px;
+  padding: 5px;
+  margin: 20px auto; /* Centralizar horizontalmente */
+  border-radius: 5px;
+  border: 1px solid #007bff;
+  text-align: center;
+  display: block; /* Necessário para margin auto funcionar corretamente */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-btn, .cancel-btn {
+  padding: 10px 25px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.confirm-btn:hover, .cancel-btn:hover {
+  background-color: #000;
+}
+
+.confirm-btn {
+  background-color: #ff4d4d;
+}
+
+.cancel-btn {
+  background-color: #007bff;
 }
 </style>
