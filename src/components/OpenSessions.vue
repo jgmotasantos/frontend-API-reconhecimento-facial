@@ -4,7 +4,9 @@
     <div class="open-sessions-wrapper">
       <div class="container">
         <h1>Sessões em Andamento</h1>
-        <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas</button>
+        <div class="actions">
+          <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas</button>
+        </div>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="sessions.length === 0 && !loading && !errorMessage" class="empty-message">Nenhuma sessão em andamento.</div>
@@ -182,6 +184,12 @@ h1 {
   margin-bottom: 36px;
 }
 
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .loading-message, .error-message, .empty-message {
   text-align: center;
   margin-top: 20px;
@@ -265,7 +273,6 @@ h1 {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
-  margin-bottom: 20px;
 }
 
 .delete-all-btn:hover {
