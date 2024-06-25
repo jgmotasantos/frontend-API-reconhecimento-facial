@@ -191,11 +191,16 @@ export default {
   background-color: #cc0000;
 }
 
+.actions {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  margin: 20px 0;
+}
+
 .delete-all-btn {
   background-color: #ff4d4d;
   padding: 10px 20px;
   border-radius: 5px;
-  margin-bottom: 20px;
 }
 
 .delete-all-btn:hover {

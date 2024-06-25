@@ -137,6 +137,7 @@ header {
 .navbar .links {
   display: flex;
   gap: 2rem;
+  margin-bottom:10px ;
 }
 
 .navbar .actions {
@@ -181,6 +182,12 @@ header {
   cursor: pointer;
   border-radius: 3px;
   margin-right: 10px;
+  margin-top: 5px; /* Ajuste para abaixar o botão */
+}
+
+.logout-button {
+  margin-top: 4px; /* Ajuste para abaixar o botão */
+  padding: 3px 10px;
 }
 
 .delete-user-btn:hover {
