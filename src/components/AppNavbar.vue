@@ -129,6 +129,10 @@ header {
   justify-content: space-between;
 }
 
+.navbar .logo {
+  margin-top: -12px; /* Ajuste para subir o logo */
+}
+
 .navbar .logo a {
   font-size: 2rem;
   font-weight: bold;
@@ -137,7 +141,7 @@ header {
 .navbar .links {
   display: flex;
   gap: 2rem;
-  margin-bottom:10px ;
+  margin-bottom: 10px;
 }
 
 .navbar .actions {
