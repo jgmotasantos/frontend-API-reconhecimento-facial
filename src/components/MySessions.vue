@@ -4,7 +4,7 @@
     <div class="my-sessions-wrapper">
       <div class="container">
         <h1>Sessões Encerradas</h1>
-        <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas as Sessões</button>
+        <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas</button>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="sessions.length === 0 && !loading" class="empty-message">Nenhuma sessão encerrada.</div>
@@ -119,7 +119,7 @@ export default {
       this.showModalDeleteAll = false;
     },
     deleteAllSessionsConfirmed() {
-      axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/encerradas/deletar`)
+      axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/encerradas/deletar-todas`)
         .then(response => {
           console.log('Todas as sessões encerradas foram deletadas:', response.data);
           this.fetchSessions();

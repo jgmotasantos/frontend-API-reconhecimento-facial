@@ -4,7 +4,7 @@
     <div class="open-sessions-wrapper">
       <div class="container">
         <h1>Sessões em Andamento</h1>
-        <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas as Sessões</button>
+        <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas</button>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="sessions.length === 0 && !loading && !errorMessage" class="empty-message">Nenhuma sessão em andamento.</div>
@@ -117,7 +117,7 @@ export default {
       this.showModalDeleteAll = false;
     },
     deleteAllSessionsConfirmed() {
-      axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/em-andamento/deletar`)
+      axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/em-andamento/deletar-todas`)
         .then(response => {
           console.log('Todas as sessões em andamento foram deletadas:', response.data);
           this.fetchSessions();
