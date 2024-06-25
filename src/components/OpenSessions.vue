@@ -4,6 +4,7 @@
     <div class="open-sessions-wrapper">
       <div class="container">
         <h1>Sessões em Andamento</h1>
+        <button class="delete-all-btn" @click="confirmDeleteAll">Deletar Todas as Sessões</button>
         <div v-if="loading" class="loading-message">Carregando sessões...</div>
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div v-if="sessions.length === 0 && !loading && !errorMessage" class="empty-message">Nenhuma sessão em andamento.</div>
@@ -31,6 +32,17 @@
         </div>
       </div>
     </div>
+
+    <div v-if="showModalDeleteAll" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModalDeleteAll">&times;</span>
+        <h3>Deseja realmente deletar todas as sessões em andamento?</h3>
+        <div class="modal-buttons">
+          <button class="confirm-btn" @click="deleteAllSessionsConfirmed">Sim</button>
+          <button class="cancel-btn" @click="closeModalDeleteAll">Não</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,8 +60,9 @@ export default {
       sessions: [],
       loading: false,
       errorMessage: '',
-      groupName: this.$route.params.nomeDoGrupo, // Obtém o nome do grupo da rota
+      groupName: this.$route.params.nomeDoGrupo,
       showModal: false,
+      showModalDeleteAll: false,
       sessionToDelete: ''
     };
   },
@@ -63,7 +76,7 @@ export default {
       axios.get(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/em-andamento`)
         .then(response => {
           this.sessions = response.data.sessions;
-          console.log('Sessões em andamento:', response.data); // Adicionando o log aqui
+          console.log('Sessões em andamento:', response.data);
         })
         .catch(error => {
           this.errorMessage = 'Erro ao buscar sessões em andamento.';
@@ -72,10 +85,6 @@ export default {
         .finally(() => {
           this.loading = false;
         });
-    },
-    formatDate(dateString) {
-      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      return new Date(dateString).toLocaleDateString('pt-BR', options);
     },
     validateFaces(sessionName) {
       this.$router.push({ path: `/grupos/${encodeURIComponent(this.groupName)}/sessoes/${encodeURIComponent(sessionName)}/validar-face` });
@@ -93,12 +102,30 @@ export default {
       axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/${encodedSessionName}/deletar`)
         .then(response => {
           console.log('Sessão deletada com sucesso:', response.data);
-          this.fetchSessions(); // Recarregar a lista de sessões
-          this.closeModal(); // Fechar o modal
+          this.fetchSessions();
+          this.closeModal();
         })
         .catch(error => {
           this.errorMessage = 'Erro ao deletar a sessão.';
           console.error('Erro ao deletar a sessão:', error.response ? error.response.data : error.message);
+        });
+    },
+    confirmDeleteAll() {
+      this.showModalDeleteAll = true;
+    },
+    closeModalDeleteAll() {
+      this.showModalDeleteAll = false;
+    },
+    deleteAllSessionsConfirmed() {
+      axios.delete(`http://localhost:8080/grupos/${encodeURIComponent(this.groupName)}/sessoes/em-andamento/deletar`)
+        .then(response => {
+          console.log('Todas as sessões em andamento foram deletadas:', response.data);
+          this.fetchSessions();
+          this.closeModalDeleteAll();
+        })
+        .catch(error => {
+          this.errorMessage = 'Erro ao deletar todas as sessões.';
+          console.error('Erro ao deletar todas as sessões:', error.response ? error.response.data : error.message);
         });
     }
   }
@@ -126,7 +153,7 @@ export default {
   border: 2px solid rgb(0, 98, 255);
   border-radius: 10px;
   backdrop-filter: blur(15px);
-  overflow-y: auto; /* Adicionando barra de rolagem */
+  overflow-y: auto;
 }
 
 /* Estilos para a barra de rolagem */
@@ -135,18 +162,18 @@ export default {
 }
 
 .container::-webkit-scrollbar-track {
-  background: #1c1c1c; /* Cor do fundo da barra de rolagem */
+  background: #1c1c1c;
   border-radius: 10px;
 }
 
 .container::-webkit-scrollbar-thumb {
-  background-color: rgb(0, 98, 255); /* Cor do polegar da barra de rolagem */
+  background-color: rgb(0, 98, 255);
   border-radius: 10px;
-  border: 1px solid #1c1c1c; /* Remover o fundo branco */
+  border: 1px solid #1c1c1c;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-  background-color: #0056b3; /* Cor do polegar da barra de rolagem quando em hover */
+  background-color: #0056b3;
 }
 
 h1 {
@@ -173,16 +200,16 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 500px; /* Altura máxima da lista */
-  overflow-y: auto; /* Barra de rolagem vertical */
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .session-item {
   background-color: #1c1c1c;
   border: 2px solid rgb(0, 98, 255);
   border-radius: 10px;
-  padding: 10px; /* Diminuindo o padding */
-  margin-bottom: 10px; /* Diminuindo a margem */
+  padding: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -195,13 +222,13 @@ h1 {
 
 .session-item h2 {
   color: #eee;
-  font-size: 1.2em; /* Diminuindo o tamanho da fonte */
+  font-size: 1.2em;
   margin: 0;
 }
 
 .session-item p {
   color: #bbb;
-  font-size: 0.9em; /* Diminuindo o tamanho da fonte */
+  font-size: 0.9em;
   margin: 0;
 }
 
@@ -228,6 +255,20 @@ h1 {
 }
 
 .delete-btn:hover {
+  background-color: #cc0000;
+}
+
+.delete-all-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.delete-all-btn:hover {
   background-color: #cc0000;
 }
 
