@@ -201,7 +201,7 @@ header {
 .dropdown-menu {
   display: none;
   position: absolute;
-  right: 2rem;
+  right: 2.5rem;
   top: 60px;
   height: 0;
   width: 300px;
